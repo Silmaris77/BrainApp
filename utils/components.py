@@ -250,13 +250,13 @@ def zen_header(title, subtitle=None):
 def navigation_menu():
     """Wyświetla menu nawigacyjne aplikacji"""
     
-    menu_options = [
-        {"id": "dashboard", "name": "Dashboard", "icon": "🏠"},
+    menu_options = [        {"id": "dashboard", "name": "Dashboard", "icon": "🏠"},
         {"id": "degen_test", "name": "Test degena", "icon": "🧪"},
+        {"id": "neuroleader_test", "name": "Test neuroliderera", "icon": "🧠"},
         {"id": "lesson", "name": "Lekcje", "icon": "📚"},
         {"id": "skills", "name": "Umiejętności", "icon": "🌳"},
         {"id": "shop", "name": "Sklep", "icon": "🛒"},
-        {"id": "degen_explorer", "name": "Eksplorator", "icon": "🔍"},
+        {"id": "neuroleader_explorer", "name": "Eksplorator", "icon": "🔍"},
         {"id": "profile", "name": "Profil", "icon": "👤"}
     ]
     

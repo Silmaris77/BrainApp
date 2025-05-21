@@ -13,15 +13,16 @@ if APP_DIR not in sys.path:
     sys.path.append(APP_DIR)
 
 # Pozostały import - próbujemy z obsługą błędów
-try:
+try:    
     from utils.session import init_session_state, clear_session
     from utils.components import zen_header, navigation_menu
     from views.login import show_login_page
     from views.dashboard import show_dashboard
     from views.degen_test import show_degen_test
+    from views.neuroleader_test import show_neuroleader_test
     from views.lesson import show_lesson
     from views.profile import show_profile
-    from views.degen_explorer import show_degen_explorer
+    from views.neuroleader_explorer import show_neuroleader_explorer
     from views.skills_new import show_skill_tree
     from views.admin import show_admin_dashboard
     
@@ -67,12 +68,14 @@ def main():
             show_dashboard()
         elif st.session_state.page == 'degen_test':
             show_degen_test()
+        elif st.session_state.page == 'neuroleader_test':
+            show_neuroleader_test()
         elif st.session_state.page == 'lesson':
-            show_lesson()
+            show_lesson()        
         elif st.session_state.page == 'profile':
             show_profile()
-        elif st.session_state.page == 'degen_explorer':
-            show_degen_explorer()
+        elif st.session_state.page == 'neuroleader_explorer':
+            show_neuroleader_explorer()
         elif st.session_state.page == 'skills':
             show_skill_tree()
         elif st.session_state.page == 'shop':

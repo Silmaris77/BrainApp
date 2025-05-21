@@ -7,11 +7,13 @@ import matplotlib.pyplot as plt
 from datetime import datetime, timedelta
 from data.users import load_user_data, save_user_data
 from data.test_questions import DEGEN_TYPES
+from data.neuroleader_types import NEUROLEADER_TYPES  # Import neuroleader types
 from config.settings import DAILY_MISSIONS, XP_LEVELS, USER_AVATARS
 from data.lessons import load_lessons
 from utils.goals import get_user_goals, calculate_goal_metrics
 from utils.daily_missions import get_daily_missions_progress
-from views.degen_test import plot_radar_chart
+from views.degen_test import plot_radar_chart as plot_degen_radar_chart
+from views.neuroleader_test import plot_radar_chart as plot_neuroleader_radar_chart  # Import neuroleader radar chart
 from utils.material3_components import apply_material3_theme
 from utils.layout import get_device_type, responsive_grid, responsive_container, toggle_device_view
 from utils.components import (
@@ -234,21 +236,39 @@ def show_dashboard():
             completed_lessons=len(user_data.get('completed_lessons', [])),
             next_level_xp=next_level_xp
         )
-    
-    # 1b. PROFIL INWESTYCYJNY (kolumna 2)
+      # 1b. PROFIL INWESTYCYJNY (kolumna 2)
     with investor_profile_col:
-        st.subheader("Twój profil inwestycyjny")
+        tab1, tab2 = st.tabs(["Profil Inwestycyjny", "Profil Neuroliderera"])
         
-        if 'test_scores' in user_data:
-            radar_fig = plot_radar_chart(user_data['test_scores'])
-            st.pyplot(radar_fig)
-        elif not user_data.get('test_taken', False):
-            st.info("Wykonaj test Degena, aby odkryć swój profil inwestycyjny")
-            if zen_button("Wykonaj test Degena"):
-                st.session_state.page = 'degen_test'
-                st.rerun()
-        else:
-            st.info("Twój profil inwestycyjny jest jeszcze niekompletny")
+        with tab1:
+            if 'test_scores' in user_data:
+                try:
+                    radar_fig = plot_degen_radar_chart(user_data['test_scores'])
+                    st.pyplot(radar_fig)
+                except:
+                    st.error("Wystąpił problem z wizualizacją profilu inwestycyjnego.")
+            elif not user_data.get('test_taken', False):
+                st.info("Wykonaj test Degena, aby odkryć swój profil inwestycyjny")
+                if zen_button("Wykonaj test Degena"):
+                    st.session_state.page = 'degen_test'
+                    st.rerun()
+            else:
+                st.info("Twój profil inwestycyjny jest jeszcze niekompletny")
+        
+        with tab2:
+            if 'neuroleader_test_scores' in user_data:
+                try:
+                    radar_fig = plot_neuroleader_radar_chart(user_data['neuroleader_test_scores'])
+                    st.pyplot(radar_fig)
+                except:
+                    st.error("Wystąpił problem z wizualizacją profilu neuroliderera.")
+            elif not user_data.get('neuroleader_test_taken', False):
+                st.info("Wykonaj test Neuroliderera, aby odkryć swój profil przywódczy")
+                if zen_button("Wykonaj test Neuroliderera"):
+                    st.session_state.page = 'neuroleader_test'
+                    st.rerun()
+            else:
+                st.info("Twój profil neuroleaderski jest jeszcze niekompletny")
     
     st.markdown("</div>", unsafe_allow_html=True)
       # WIERSZ 2: Dostępne lekcje w pełnej szerokości
