@@ -1,0 +1,569 @@
+/* 
+   style.css - Główny plik stylów dla aplikacji DegApp
+   Autor: Anna
+   Data: 15.05.2025
+*/
+
+/* Zmienne CSS */
+:root {
+  --primary-color: #2980B9;
+  --primary-light: #6DD5FA;
+  --secondary-color: #27ae60;
+  --background-light: #f7f7f7;
+  --background-dark: #1a1a1a;
+  --text-primary: #2C3E50;
+  --text-secondary: #666;
+  --success-color: #27ae60;
+  --warning-color: #f39c12;
+  --error-color: #e74c3c;
+  --radius-sm: 5px;
+  --radius-md: 10px;
+  --radius-lg: 15px;
+  --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+  --shadow-lg: 0 8px 15px rgba(0,0,0,0.1);
+  --transition-fast: 0.3s ease;
+  --font-primary: 'Arial', sans-serif;
+}
+
+/* Podstawowe style */
+.main {
+    background-color: var(--background-light);
+}
+.st-bx {
+    background-color: #ffffff;
+    border-radius: var(--radius-md);
+    padding: 20px;
+    box-shadow: var(--shadow-md);
+}
+.zen-header {
+    color: var(--text-primary);
+    text-align: center;
+    font-family: var(--font-primary);
+    padding: 10px;
+    margin-bottom: 20px;
+    background: linear-gradient(90deg, var(--primary-light) 0%, var(--primary-color) 100%);
+    border-radius: var(--radius-md);
+    color: white;
+}
+.block-container {
+    padding-top: 0;
+}
+
+/* Hide navigation elements */
+[data-testid="stSidebar"] > div:nth-of-type(2) {
+    display: none;
+}
+section[data-testid="stSidebarNav"] {
+    display: none;
+}
+.main > div:first-child {
+    visibility: hidden;
+    height: 0;
+    padding: 0;
+}
+button[kind="header"] {
+    display: none;
+}
+
+/* Karty degena */
+.degen-card {
+    background-color: #ffffff;
+    border-radius: var(--radius-md);
+    padding: 20px;
+    margin: 12px 0;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-fast);
+    position: relative;
+    overflow: hidden;
+    border-left: 5px solid var(--primary-color);
+}
+.degen-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+.degen-card h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: 0.3px;
+}
+.degen-card p {
+    color: var(--text-secondary);
+    margin-bottom: 18px;
+    line-height: 1.5;
+    font-size: 14px;
+}
+.degen-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    padding-top: 12px;
+    border-top: 1px solid #f0f0f0;
+}
+
+/* Odznaki */
+.badge-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    color: white;
+    box-shadow: var(--shadow-sm);
+}
+.badge i {
+    margin-right: 3px;
+    font-size: 10px;
+}
+.badge-xp { background-color: var(--success-color); }
+.badge-level { background-color: var(--error-color); }
+.badge-time { background-color: var(--primary-color); }
+.badge-difficulty-beginner { background-color: #2ecc71; }
+.badge-difficulty-intermediate { background-color: var(--warning-color); }
+.badge-difficulty-advanced { background-color: var(--error-color); }
+.badge-tag { background-color: #98989C; }
+
+/* Status lekcji */
+.lesson-status {
+    display: inline-flex;
+    align-items: center;
+    font-weight: 600;
+    font-size: 13px;
+    padding: 5px 10px;
+    border-radius: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.lesson-status-completed {
+    color: var(--success-color);
+    background-color: rgba(39, 174, 96, 0.1);
+}
+.lesson-status-incomplete {
+    color: #7f8c8d;
+    background-color: rgba(127, 140, 141, 0.1);
+}
+
+/* Typy kart degena */
+.degen-card-beginner { border-left-color: #2ecc71; }
+.degen-card-intermediate { border-left-color: var(--warning-color); }
+.degen-card-advanced { border-left-color: var(--error-color); }
+
+/* Przyciski */
+.btn-zen {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+}
+.btn-zen:hover {
+    background-color: #1c638d;
+}
+
+/* Ulepszone style przycisków */
+[data-testid="stButton"] button {
+    margin-bottom: 2px;
+    transition: var(--transition-fast);
+    box-shadow: var(--shadow-sm);
+    transform: translateY(0);
+    border-radius: 6px;
+    position: relative;
+    padding-left: 15px;
+    background: white;
+    border: 1px solid #e0e0e0;
+}
+
+[data-testid="stButton"] button:hover:not(:disabled) {
+    background: linear-gradient(to right, #ffffff, #f8f9fa);
+    border-color: var(--primary-light);
+    color: #000000 !important; /* Czarny tekst dla lepszej widoczności */
+    transform: translateX(5px);
+    box-shadow: 0 4px 8px rgba(109, 213, 250, 0.2);
+}
+
+[data-testid="stButton"] button:active {
+    transform: translateY(2px);
+    box-shadow: var(--shadow-sm);
+    background: linear-gradient(to right, var(--primary-light), var(--primary-color));
+    color: white !important; /* Biały tekst dla lepszej widoczności */
+    font-weight: bold;
+    border-color: transparent;
+}
+
+[data-testid="stButton"] button::before {
+    content: "›";
+    position: absolute;
+    left: 10px;
+    opacity: 0;
+    transition: var(--transition-fast);
+}
+
+[data-testid="stButton"] button:hover::before {
+    opacity: 1;
+    left: 15px;
+}
+
+/* Style misji */
+.mission-progress-container {
+    width: 100%;
+    background-color: #f1f1f1;
+    border-radius: var(--radius-md);
+    height: 20px;
+    overflow: hidden;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+}
+.mission-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-light) 0%, var(--primary-color) 100%);
+    text-align: center;
+    line-height: 20px;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    transition: width 0.5s ease-in-out;
+    min-width: 30px;
+}
+.streak-container {
+    text-align: center;
+    margin-left: 15px;
+}
+.streak-badge {
+    background-color: #ff7e5f;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 14px;
+    display: inline-block;
+    box-shadow: 0 2px 5px rgba(255,126,95,0.3);
+}
+.streak-label {
+    font-size: 12px;
+    color: #888;
+    margin-top: 5px;
+}
+
+/* Karta misji */
+.mission-card {
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: var(--radius-md);
+    border: 1px solid #e0e0e0;
+    background-color: white;
+    transition: var(--transition-fast);
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+.mission-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+.mission-card.completed {
+    border-color: var(--success-color);
+    background-color: #f0fff4;
+}
+.mission-card.completed::before {
+    content: "✓";
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 40px;
+    height: 40px;
+    background-color: var(--success-color);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    transform: rotate(15deg);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+.mission-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.mission-badge {
+    font-size: 1.8rem;
+    margin-right: 15px;
+    background-color: #f8f9fa;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-sm);
+}
+.mission-title {
+    font-weight: bold;
+    font-size: 16px;
+    color: var(--text-primary);
+}
+.mission-desc {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+}
+.mission-xp {
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 14px;
+    display: inline-block;
+    background-color: rgba(41, 128, 185, 0.1);
+    padding: 3px 10px;
+    border-radius: 15px;
+}
+
+/* Style strony profilu */
+.profile-tab-content {
+    padding: 20px 0;
+}
+
+.avatar-selector {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.avatar-option {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    background-color: white;
+    box-shadow: var(--shadow-sm);
+}
+
+.avatar-option:hover, .avatar-option.selected {
+    transform: scale(1.1);
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-md);
+}
+
+.theme-option {
+    padding: 15px;
+    border-radius: var(--radius-md);
+    border: 2px solid #e0e0e0;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    margin-bottom: 10px;
+}
+
+.theme-option:hover, .theme-option.selected {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-md);
+}
+
+.theme-colors {
+    display: flex;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.theme-color-sample {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+/* Karty celów */
+.goal-card {
+    background-color: white;
+    border-radius: var(--radius-md);
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-fast);
+    position: relative;
+    overflow: hidden;
+    border-left: 5px solid var(--primary-color);
+}
+
+.goal-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.goal-card.completed {
+    border-left-color: var(--success-color);
+}
+
+.goal-card.completed::after {
+    content: "✓";
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 40px;
+    height: 40px;
+    background-color: var(--success-color);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    transform: rotate(15deg);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.goal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.goal-date {
+    font-size: 12px;
+    color: #7f8c8d;
+    background-color: #f5f5f5;
+    padding: 3px 8px;
+    border-radius: 10px;
+}
+
+.goal-progress-container {
+    height: 10px;
+    background-color: #f1f1f1;
+    border-radius: var(--radius-sm);
+    margin: 10px 0;
+    overflow: hidden;
+}
+
+.goal-progress-bar {
+    height: 100%;
+    transition: width 0.5s ease-in-out;
+}
+
+/* Karty odznak */
+.badge-card {
+    text-align: center;
+    padding: 20px 15px;
+    border-radius: var(--radius-md);
+    background-color: white;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-fast);
+    margin-bottom: 15px;
+}
+
+.badge-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.badge-icon {
+    font-size: 48px;
+    margin-bottom: 10px;
+    display: inline-block;
+    transform-origin: center;
+    animation: badge-shine 3s infinite;
+}
+
+@keyframes badge-shine {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); filter: drop-shadow(0 0 5px rgba(41,128,185,0.5)); }
+    100% { transform: scale(1); }
+}
+
+/* Style dla nawigacji w sidebarze */
+.streamlit-expanderHeader:hover {
+    color: var(--primary-color);
+}
+
+[data-testid="stButton"] button:disabled {
+    transform: none;
+    box-shadow: inset 0 0 10px rgba(109, 213, 250, 0.2);
+    background: linear-gradient(to right, var(--primary-color), var(--primary-color));
+    color: white !important; /* Biały tekst z lepszą widocznością */
+    font-weight: bold; /* Pogrubiony tekst dla lepszej widoczności */
+    border: none;
+    opacity: 1;
+}
+
+div.stButton > button {
+    width: 100%;
+    margin-bottom: 2px;
+    transition: var(--transition-fast);
+    box-shadow: var(--shadow-sm);
+    transform: translateY(0);
+    border-radius: 6px;
+    position: relative;
+    padding-left: 15px;
+}
+
+/* Podświetlenie dla aktualnej sekcji */
+[data-testid="stSidebar"] [data-testid="stButton"] button:disabled::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--primary-light);
+    border-radius: 0 6px 6px 0;
+}
+
+/* Nagłówki sekcji w sidebarze */
+[data-testid="stSidebar"] h3 {
+    color: var(--text-primary);
+    font-size: 1.1em;
+    padding: 10px 0;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #f0f2f6;
+}
+
+/* Animacje */
+@keyframes completedAnimation {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+.mission-card.just-completed {
+    animation: completedAnimation 0.5s ease;
+}
+
+/* Dark mode styles */
+.dark-mode {
+    --background-light: var(--background-dark);
+    --text-primary: #ffffff;
+    --text-secondary: #cccccc;
+}
+.dark-mode .st-bx,
+.dark-mode .degen-card,
+.dark-mode .mission-card,
+.dark-mode .goal-card,
+.dark-mode .badge-card {
+    background-color: #2d2d2d;
+    border-color: #444;
+}
+.dark-mode .mission-title,
+.dark-mode .goal-header,
+.dark-mode h4 {
+    color: #ffffff;
+}
+.dark-mode .mission-desc,
+.dark-mode .goal-date,
+.dark-mode p {
+    color: #aaaaaa;
+}

@@ -1,0 +1,122 @@
+{
+  "id": "B1C1L1",
+  "xp_reward": 100,
+  "tag": "Psychologia inwestowania",
+  "description": "Ta lekcja wprowadza podstawy teorii perspektywy, efektu dyspozycji oraz zarządzania emocjami w inwestowaniu.",
+  "title": "Strach przed stratą",
+  "difficulty": "advanced",
+  "intro": {
+    "main": "<p><strong>Intro do lekcji: Strach przed stratą 🎢💸</strong></p><p>Inwestowanie – to nie tylko matematyka, wykresy i Excel, to także emocjonalna gra na najwyższych obrotach. Kiedy przychodzi czas decyzji, czujesz ten dreszczyk emocji, prawda? Czasami to ekscytacja, a innym razem – strach. Ale co, jeśli ten strach, a dokładniej strach przed stratą, jest tym, co blokuje cię przed podejmowaniem najlepszych decyzji inwestycyjnych? 🧠💭</p><p>W tej lekcji zgłębimy to zjawisko i zrozumiemy, dlaczego strata – nawet niewielka – boli nas o wiele bardziej niż zysk tej samej wartości. Dla wielu z nas to właśnie strach przed utratą pieniędzy powstrzymuje nas od podejmowania mądrych decyzji.</p><p>Zanim zaczniemy, warto zadać sobie pytanie: Dlaczego inwestowanie jest tak emocjonalne? Jak strach przed stratą wpływa na nasze decyzje i jak można nad nim zapanować?</p><p>Oto, o czym będziemy mówić:</p><ul><li>Teorię perspektywy – dowiesz się, jak nasze umysły podchodzą do zysków i strat.</li><li>Efekt dyspozycji – dlaczego trzymasz przegrywające akcje, zamiast spróbować od nich odejść.</li><li>Jak emocje rządzą twoim portfelem i jak je przejąć pod kontrolę, by nie reagować impulsywnie, kiedy coś idzie nie tak.</li></ul><p>Chciałbym, żebyś po tej lekcji nie tylko lepiej rozumiał mechanizm strachu przed stratą, ale również nauczył się, jak go opanować, żeby Twoje decyzje inwestycyjne stały się bardziej świadome, mniej impulsywne i oparte na długoterminowej strategii. 🚀</p><p>Jesteś gotowy, by nauczyć się, jak zarządzać swoimi emocjami na rynku, a nie odwrotnie? Przygotuj się na jazdę bez trzymanki i odkryj, jak strach przed stratą może stać się Twoim sprzymierzeńcem, a nie wrogiem! 🌟</p>",
+    "case_study": "<p><strong>Degen w tarapatach</strong> 📱💸</p><p>Kuba, 26-letni początkujący inwestor, swoją wiedzę o kryptowalutach czerpie głównie z TikToka i Discorda. Niedawno \"wszamał\" kilka shortów na shitcoinach i miał niezły run – w zaledwie dwa tygodnie zarobił 1500 zł. 💰</p><p>Zmotywowany tym sukcesem, postanowił wrzucić całe swoje oszczędności (10 000 zł) w token $MOONZ, bo \"wszyscy na grupie pisali, że będzie 10x\". Kuba nie sprawdził fundamentów projektu – po prostu zaufał, że hype = pewniak. 🚀</p><p>Po dwóch dniach cena spadła o 20%. Kuba wpadł w panikę. Otwierał apkę co 3 minuty, scrollował komentarze, desperacko szukając potwierdzenia, że \"to tylko korekta\". Z jednej strony bał się sprzedać, bo oznaczałoby to realną stratę, z drugiej strony panicznie bał się trzymać, bo \"może spaść jeszcze bardziej\". 😰</p><p><strong>Pytania do refleksji:</strong></p><ul><li>Co mogło wywołać tak silny strach u Kuby mimo wcześniejszych sukcesów?</li><li>Jak działa tu awersja do strat? A jak efekt dyspozycji?</li><li>Jakie degenowe schematy pojawiają się w tej sytuacji?</li><li>Co Kuba mógłby zrobić, żeby zmienić sposób podejmowania decyzji?</li></ul><p>W trakcie tej lekcji zrozumiesz, jakie psychologiczne pułapki wpędziły Kubę w taki stan i jak Ty możesz ich uniknąć w swoich inwestycjach! 🧠💡</p>"
+  },
+  "sections": {
+    "opening_quiz": {
+      "title": "Quiz startowy",
+      "description": "Sprawdź swoją wiedzę przed rozpoczęciem lekcji",
+      "questions": [
+        {
+          "question": "Co to jest efekt dyspozycji?",
+          "options": [
+            "Sposób organizacji naszego portfela inwestycyjnego",
+            "Tendencja do zbyt szybkiego sprzedawania zyskownych aktywów i zbyt długiego trzymania stratnych",
+            "Nawyk sprawdzania notowań co godzinę",
+            "Skłonność do inwestowania tylko w znane marki"
+          ],
+          "correct_answer": 1,
+          "explanation": "Efekt dyspozycji to psychologiczna tendencja inwestorów do przedwczesnego sprzedawania zyskownych inwestycji i zbyt długiego trzymania stratnych."
+        },
+        {
+          "question": "Ile razy silniej odczuwamy stratę niż równowartościowy zysk według teorii perspektywy?",
+          "options": [
+            "Tak samo",
+            "1,5 raza",
+            "2-2,5 raza",
+            "5 razy"
+          ],
+          "correct_answer": 2,
+          "explanation": "Według teorii perspektywy Kahnemana i Tversky'ego, ból straty jest około 2-2,5 raza silniejszy niż radość z równowartościowego zysku."
+        }
+      ]
+    },
+    "learning": {
+      "sections": [
+        {
+          "title": "📈🤯 Inwestowanie to nie tylko tabelki, wykresy i Excel na sterydach!",
+          "content": "<p>To przede <strong> wszystkim </strong> jazda na emocjonalnym rollercoasterze 🎢. To nasze wewnętrzne dramaty rodem z Netflixa, które decydują o tym, czy po każdej transakcji przybijamy piątkę 🙌 czy scrollujemy z miną smutnego kotka. 😿 Niby mamy wszystko policzone, ale potem przychodzi impuls, chwila zwątpienia, albo przypływ euforii i… no właśnie – robimy coś, czego później możemy żałować.</p> <p>🤷‍♂️ Dlatego przygotowałem dla Ciebie cztery turbo istotne mechanizmy psychologiczne, które wpływają na Twoje decyzje inwestycyjne. 🧠✨ Pokażę Ci, jak te triki działają w realnym świecie – krok po kroku, przykład po przykładzie – oraz zdradzę proste patenty, jak je ujarzmić, zanim znów klikniesz \"kup\" albo \"sprzedaj\". 🚦 Uwierz mi, że ogarnięcie tych mentalnych pułapek to game changer – dzięki temu zamiast stresować się każdym ruchem na giełdzie, zaczniesz podejmować decyzje na chilloucie i z głową. 💆‍♀️💰</p>"
+        },
+        {
+          "title": "🥑📉 1. Teoria perspektywy, czyli dlaczego tracenie boli bardziej niż cieszy zarabianie",
+          "content": "<p>Wyobraź sobie, że zgubiłeś stówę 💸. No dramat, prawda? A teraz wyobraź sobie, że znalazłeś stówę na chodniku – fajnie, ale… to zgubienie jakoś bolało bardziej, prawda? 🤔 Dokładnie o tym mówi teoria perspektywy Kahnemana i Tversky'ego. Naukowcy zauważyli, że ból po utracie pieniędzy jest około 2–2,5 raza mocniejszy niż radość z ich zarobienia. To taki psychologiczny trik, który powoduje, że częściej działamy, żeby unikać strat, niż żeby maksymalizować zyski.</p> <p>📌 Przykład z życia (wzięty prosto z twojej apki inwestycyjnej):</p> <ul><li>Opcja A: 100% szans na pewne 500 zł. Safe, zero emocji, czysty spokój. 😌</li><li>Opcja B: Rzut monetą – 50% szans na 1000 zł, ale też 50% szans, że dostaniesz okrągłe 0 zł. 🚀🤞 lub 🤦‍♂️</li></ul><p>Z matematyką się nie dyskutuje – obie opcje średnio dają to samo (500 zł). Ale większość ludzi wybierze pewne 500 zł. Czemu? Bo niepewność i ryzyko utraty boli bardziej niż perspektywa dodatkowej kasy.</p><p>To jak z oglądaniem seriali – wolimy obejrzeć coś, co polecił nam znajomy (pewny hit 🎬), zamiast ryzykować dwie godziny na randomowym filmie, który może być genialny albo katastrofalny. W inwestowaniu działa to identycznie. Częściej wybieramy obligacje, które obiecują pewne 2%, zamiast ryzykować z akcjami, które mogą dać 8%, ale mogą też przynieść nerwy i stres. A gdy rynek zaczyna lecieć w dół, większość ludzi reaguje paniką i wycofuje się, zamiast przeczekać i dać sobie szansę na odbicie 📈.</p><p>🎯 Co zrobić, żeby emocje nie rządziły twoim portfelem?</p><ul><li>Zoom out, czyli szeroka perspektywa 📸</li><li>Wyznacz sobie limit strat 🚧</li><li>Przestań codziennie sprawdzać apki inwestycyjne 📵</li><li>Zmień sposób myślenia o stratach 💡</li></ul><p>Pamiętaj – małe straty są naturalne i potrzebne, by w długiej perspektywie móc naprawdę zarabiać. 🤗✨</p>"
+        },
+        {
+          "title": "🚀💸 2. Efekt dyspozycji, czyli dlaczego trzymasz przegrywów i za szybko odpuszczasz zwycięzców",
+          "content": "<p>Znasz ten vibe, kiedy wrzucasz story na Instagrama i masz 100 lajków w 5 minut – od razu masz ochotę się tym pochwalić, prawda? 🥳 A kiedy coś nie pójdzie, np. nikt nie reaguje na twoje najlepsze selfie, jakoś mniej chętnie się tym dzielisz i wolisz to usunąć? 🤦‍♀️ To samo dzieje się w świecie inwestowania – tylko zamiast lajków są zyski i straty.</p> <p>To właśnie jest efekt dyspozycji – kiedy zbyt szybko sprzedajesz akcje, które zarabiają (żeby szybko ogłosić sukces 🎉), a jednocześnie upierasz się przy trzymaniu tych, które lecą w dół (bo przyznanie się do błędu boli 🤕). Ekonomista Hersh Shefrin nazwał to \"get-evenitis\", czyli syndrom \"wyjdę na zero za wszelką cenę\".</p><p>📌 Zobacz, jak to działa w praktyce:</p><ul><li>Załóżmy, że wrzuciłeś 50 zł w akcje dwóch spółek: X i Y.</li><li>Akcje X poszły w górę do 60 zł (+20% 😍)</li><li>Akcje Y spadły do 40 zł (-20% 😢)</li></ul><p>Pewnie już czujesz pokusę, żeby sprzedać akcje X – \"lepiej szybko zgarnąć te +20% i mieć pewny sukces, zanim się rozpłyną\". Jednocześnie kompletnie nie masz ochoty pozbywać się spółki Y, bo wtedy oficjalnie zaliczysz wtopę. Więc trzymasz je uparcie, licząc na odbicie się w górę.</p><p>A co się dzieje dalej? 🚨 Bardzo często akcje X dalej rosną, ale ty już ich nie masz. Akcje Y lecą dalej w dół, a twoja strata rośnie – bo liczyłeś na cud.</p><p>🎯 Co możesz zrobić, żeby ten efekt przestał sabotować twój portfel?</p><ul><li>Ustal jasne reguły gry 🗒️</li><li>Zacznij regularnie przeglądać portfel z chłodną głową 🥶</li><li>Zapomnij o cenie zakupu 🧹</li><li>Ucz się na własnych błędach 📝</li></ul><p>Pamiętaj – prawdziwy inwestor to nie ten, który nigdy nie przegrywa, tylko ten, który uczy się na błędach i nie daje się im ponieść. 🌟💪</p>"
+        },
+        {
+          "title": "🧠🔥 3. Dopamina, czyli dlaczego zarabianie hajsu tak uzależnia?",
+          "content": "<p>Kojarzysz to uczucie, kiedy dostajesz powiadomienie, że twój nowy post na Insta zgarnął mega dużo serduszek? 💖 Albo jak zobaczysz, że twój filmik na TikToku nagle wystrzelił w trendy? 🚀 To nie przypadek – to dopamina, królowa naszego mózgu, która daje ci ten słodki strzał przyjemności. 🍭</p><p>No więc, surprise-surprise – inwestowanie działa dokładnie tak samo. Gdy trafiasz świetną transakcję, twój mózg nagradza cię właśnie dopaminą – dokładnie tą samą substancją, którą uwalnia, kiedy jesz pyszną pizzę 🍕, wygrywasz w Fortnite'a 🎮, czy dostajesz setki lajków na swoje selfie 🤳.</p><p>🤷‍♂️ Co w tym złego?</p><p>Niby nic, ale to właśnie ten mechanizm sprawia, że czasem zachowujemy się jak hazardziści w kasynie. 🎰 Każda udana transakcja daje ci poczucie nieśmiertelności – \"skoro raz się udało, czemu nie spróbować jeszcze raz, i jeszcze raz?\". I nagle zaczynasz podejmować ryzykowne decyzje, zwiększasz stawki, bo po prostu chcesz poczuć ten dreszcz jeszcze raz. 🥳</p><p>Niestety, gdy sprawy nie idą po twojej myśli i zaliczasz porażkę – twój mózg reaguje tak, jakbyś dostał kosza przed całym klubem. Dosłownie boli – to nie żart! Badania mówią jasno: twój mózg przeżywa stratę kasy podobnie jak fizyczny ból.</p><p>⚠️ Co może pójść nie tak?</p><p>Wyobraź sobie, że udało ci się kilka razy dobrze zainwestować – może jakaś kryptowaluta albo akcje poszły mega w górę. Czujesz euforię, zaczynasz ryzykować więcej, bo dopamina podpowiada ci, że jesteś inwestycyjnym geniuszem 🤑.</p><p>Potem nadchodzi dzień, kiedy wszystko zaczyna się sypać. Stracisz trochę kasy i nagle odczuwasz panikę lub desperację, żeby odzyskać swoje pieniądze. Zaczynasz jeszcze bardziej ryzykować, angażujesz coraz więcej środków w nadziei, że szybko się odegrasz.</p><p>💡 Jak więc ogarnąć ten mózgowy rollercoaster?</p><ul><li>Znaj swoje słabości 🙇‍♀️</li><li>Take a break 🛑</li><li>Stick to the plan 📓</li><li>Pamiętaj, że inwestowanie to nie kasyno 🎲</li><li>Relaksuj się świadomie 🧘‍♂️</li><li>Bądź świadomy tego, jak działa twój mózg 🧠✨</li></ul><p>Pamiętaj – inwestowanie to gra długoterminowa, więc trzymaj emocje w ryzach, a hajsy w kieszeni. 😉🚀</p>"
+        },
+        {
+          "title": "🎬🖼️ 4. Efekt obramowania, czyli jak sprytnie podana informacja potrafi nami manipulować",
+          "content": "<p>Wyobraź sobie, że umawiasz się ze znajomymi na imprezę 🍹. Kumpel pisze ci, że \"prawdopodobnie będzie mega ekipa i świetny vibe\", a drugi znajomy ostrzega, że \"jest ryzyko, że nikt fajny się nie pojawi\". To samo wydarzenie, dwie zupełnie różne historie, prawda? 🤷‍♂️ No właśnie – to jest framing w czystej postaci!</p> <p>O co chodzi z tym framingiem? 🤔 Framing to po prostu sposób, w jaki przedstawiasz daną informację. To, jak ją zapakujesz, wpływa na to, jak inni (i ty sam!) ją odbierają. Niby banał, ale nasz mózg łapie się na to za każdym razem – nawet kiedy chodzi o pieniądze 💸. Daniel Kahneman i Amos Tversky przeprowadzili kultowy eksperyment, pokazując, że ludzie podejmują zupełnie inne decyzje, kiedy ta sama sytuacja jest przedstawiana jako potencjalny zysk (\"masz szansę wygrać\") albo jako możliwa strata (\"możesz stracić\"). Kiedy widzimy okazję, jesteśmy ostrożniejsi, ale kiedy grozi nam strata, zaczynamy panikować i częściej ryzykujemy, żeby jej uniknąć. Trochę jak ze związkami: gdy widzisz szansę na coś fajnego, raczej spokojnie się zastanawiasz, ale kiedy myślisz, że ktoś cię zaraz rzuci, robisz dziwne rzeczy, by temu zapobiec. 😅</p><p>📌 Jak to działa na giełdzie?</p><ul><li>Negatywnie: 😱 \"Fundusz X zanotował stratę aż -15% w ciągu ostatnich 12 miesięcy!\"</li><li>Pozytywnie: 🤩 \"Jednostki funduszu X są teraz tańsze o 15%, więc możesz je kupić po super promocyjnej cenie!\"</li></ul><p>Niby mówimy o dokładnie tym samym, ale czytasz to zupełnie inaczej, prawda? Pierwszy komunikat każe ci się zastanawiać, czy nie uciekać z kasą gdzie indziej, a drugi podpowiada, że to idealny moment, by wejść z nowym zakupem.</p><p>🚦 Jak się nie dać zmanipulować framingowi?</p><ul><li>Patrz z dwóch stron 👀</li><li>Konkrety zamiast storytellingu 📊</li><li>Porównuj jabłka z jabłkami 🍎🍏</li><li>Bądź wyczulony na marketingowe chwyty 🎯</li><li>Trenuj umysł na chłodno 🥶</li></ul><p>I pamiętaj – lepiej, gdy to ty decydujesz, a nie sprytnie sformułowane hasło reklamowe 😉✨.</p>"
+        }
+      ]
+    },
+    "reflection": {
+      "sections": [
+        {
+          "title": "Zadanie 1: Inwestycyjny Flashback",
+          "content": "<p>Przypomnij sobie sytuację, w której podjąłeś decyzję inwestycyjną pod wpływem emocji. Jakie emocje Ci towarzyszyły? Jakie były skutki tej decyzji?</p>"
+        },
+        {
+          "title": "Zadanie 2: Twoje ramy inwestycyjne",
+          "content": "<p>Przemyśl, jak różne podejścia do przedstawiania informacji o inwestycjach mogą wpływać na Twoje decyzje. Jakie ramy wykorzystujesz, by zminimalizować wpływ emocji?</p>"
+        }
+      ]
+    },
+    "application": {
+      "sections": [
+        {
+          "title": "Zadanie 1: Plan działania",
+          "content": "<p>Napisz konkretny, 3-punktowy plan działania, jak zastosujesz wiedzę z tej lekcji przy swojej następnej decyzji inwestycyjnej. Określ jasne kryteria, według których będziesz podejmować decyzje, zamiast kierować się emocjami.</p>"
+        },
+        {
+          "title": "Zadanie 2: Twój osobisty reframing",
+          "content": "<p>Wybierz jedną z trudnych sytuacji inwestycyjnych (np. spadek wartości akcji o 10%) i przeformułuj ją na trzy różne sposoby - neutralny, negatywny i pozytywny. Zastanów się, która perspektywa jest najbardziej racjonalna i dlaczego.</p>"
+        }
+      ]
+    },
+    "closing_quiz": {
+      "title": "Quiz końcowy",
+      "description": "Sprawdź, ile zapamiętałeś z tej lekcji",
+      "questions": [
+        {
+          "question": "Czym jest framing (efekt obramowania)?",
+          "options": [
+            "Techniką zarządzania portfelem inwestycyjnym",
+            "Sposobem przedstawiania informacji, który wpływa na jej odbiór",
+            "Strategią dywersyfikacji inwestycji",
+            "Metodą analizy technicznej wykresów"
+          ],
+          "correct_answer": 1,
+          "explanation": "Framing to sposób przedstawiania tej samej informacji w różny sposób, co może znacząco wpłynąć na decyzje inwestora."
+        },
+        {
+          "question": "Która z poniższych metod pomaga radzić sobie z wpływem dopaminy na decyzje inwestycyjne?",
+          "options": [
+            "Zwiększanie częstotliwości tradingu",
+            "Stawianie małych kwot na ryzykowne aktywa",
+            "Trzymanie się ustalonego wcześniej planu inwestycyjnego",
+            "Podążanie za trendami w mediach społecznościowych"
+          ],
+          "correct_answer": 2,
+          "explanation": "Trzymanie się ustalonego planu (stick to the plan) to jeden z kluczowych sposobów na ograniczenie emocjonalnego wpływu dopaminy na decyzje inwestycyjne."
+        }
+      ]
+    }
+  },
+  "outro": {
+    "main": "<p><strong>Podsumowanie:</strong> W tej lekcji poznaliśmy cztery kluczowe mechanizmy psychologiczne wpływające na decyzje inwestycyjne:</p><ul><li><strong>Teoria perspektywy</strong> – ból straty jest około 2-2,5 razy silniejszy niż radość z zysku, co prowadzi nas do unikania ryzyka i szukania pewnych opcji</li><li><strong>Efekt dyspozycji</strong> – tendencja do zbyt szybkiego sprzedawania zyskownych inwestycji i trzymania stratnych zbyt długo</li><li><strong>Wpływ dopaminy</strong> – uzależniające działanie systemu nagrody w mózgu, które może prowadzić do ryzkownych decyzji</li><li><strong>Efekt obramowania</strong> – sposób, w jaki przedstawiana jest informacja, znacząco wpływa na nasze decyzje</li></ul><p>Świadomość tych mechanizmów pozwala nam lepiej kontrolować emocje i podejmować bardziej racjonalne decyzje inwestycyjne.</p>",
+    "case_study": "<p><strong>Zakończenie studium przypadku:</strong> Pamiętasz historię Tomasza, który sprzedał akcje w panice, tracąc na tym 15%?</p><p>Patrząc na jego decyzję przez pryzmat poznanych mechanizmów psychologicznych, możemy zauważyć kilka błędów:</p><ul><li>Teoria perspektywy – Tomasz mocniej odczuwał ból związany z utratą swoich wcześniejszych zysków (40%) niż potencjalne korzyści z pozostawienia inwestycji</li><li>Efekt dyspozycji – W przeciwieństwie do typowego wzorca, Tomasz nie trzymał stratnej inwestycji, ale panika i lęk były silniejsze niż chęć wyjścia na zero</li><li>Dopamina – Po wcześniejszych sukcesach (wzrost o 40%) nagły spadek wywołał silną reakcję stresową i paniczne działania</li><li>Framing – Tomasz skupił się na ujęciu \"straciłem 15%\" zamiast na perspektywie \"to może być tylko tymczasowy spadek\"</li></ul><p>Gdyby Tomasz zastosował poznane techniki – trzymał się długoterminowego planu, zachował szerszą perspektywę czasową i nie sprawdzał notowań codziennie – prawdopodobnie przeczekałby trudny okres i ostatecznie zwiększył zysk o dodatkowe 25%.</p><p>Pamiętaj, że każdy inwestor popełnia błędy. Kluczowe jest wyciąganie z nich wniosków i systematyczne doskonalenie swojego podejścia emocjonalnego do inwestowania.</p>"
+  }
+}

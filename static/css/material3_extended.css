@@ -1,0 +1,449 @@
+/* Material 3 - Rozszerzony zestaw stylów */
+
+/* ===== System typografii ===== */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Flex:wght@300..700&display=swap');
+
+:root {
+  /* Kolory podstawowe */
+  --md-primary: #2196F3;
+  --md-primary-dark: #1976D2;
+  --md-primary-light: #BBDEFB;
+  --md-secondary: #673AB7;
+  --md-background: #FFFFFF;
+  --md-surface: #FFFFFF;
+  --md-error: #F44336;
+  
+  /* Kolory stanów */
+  --md-on-primary: #FFFFFF;
+  --md-on-secondary: #FFFFFF;
+  --md-on-background: #000000;
+  --md-on-surface: #000000;
+  --md-on-error: #FFFFFF;
+  
+  /* Zaokrąglenia */
+  --md-radius-small: 8px;
+  --md-radius-medium: 16px;
+  --md-radius-large: 24px;
+  --md-radius-extra: 32px;
+  
+  /* Cienie */
+  --md-elevation-1: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.14);
+  --md-elevation-2: 0 3px 6px rgba(0,0,0,0.15), 0 2px 4px rgba(0,0,0,0.12);
+  --md-elevation-3: 0 10px 20px rgba(0,0,0,0.15), 0 3px 6px rgba(0,0,0,0.10);
+  --md-elevation-4: 0 14px 28px rgba(0,0,0,0.18), 0 10px 10px rgba(0,0,0,0.12);
+  
+  /* Typografia */
+  --md-font-family: 'Roboto', sans-serif;
+  --md-font-family-display: 'Roboto Flex', sans-serif;
+}
+
+/* ===== Efekt Ripple (dla przycisków i elementów interaktywnych) ===== */
+.ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple:after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
+  background-repeat: no-repeat;
+  background-position: 50%;
+  transform: scale(10, 10);
+  opacity: 0;
+  transition: transform .5s, opacity 1s;
+}
+
+.ripple:active:after {
+  transform: scale(0, 0);
+  opacity: .3;
+  transition: 0s;
+}
+
+/* ===== Karty (Cards) ===== */
+.md-card {
+  background-color: var(--md-surface);
+  border-radius: var(--md-radius-medium);
+  padding: 16px;
+  box-shadow: var(--md-elevation-1);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.md-card:hover {
+  box-shadow: var(--md-elevation-2);
+  transform: translateY(-2px);
+}
+
+.md-card:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--md-primary), var(--md-secondary));
+  opacity: 0.8;
+}
+
+.md-card-title {
+  font-family: var(--md-font-family-display);
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: var(--md-on-surface);
+}
+
+.md-card-content {
+  font-family: var(--md-font-family);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: rgba(0,0,0,0.87);
+}
+
+/* ===== Przyciski (Buttons) ===== */
+.md-btn {
+  font-family: var(--md-font-family);
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 12px 24px;
+  border-radius: var(--md-radius-large);
+  border: none;
+  transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.md-btn-filled {
+  background-color: var(--md-primary);
+  color: var(--md-on-primary);
+  box-shadow: var(--md-elevation-1);
+}
+
+.md-btn-filled:hover {
+  background-color: var(--md-primary-dark);
+  box-shadow: var(--md-elevation-2);
+  transform: translateY(-1px);
+}
+
+.md-btn-filled:active {
+  box-shadow: var(--md-elevation-1);
+  transform: translateY(0);
+}
+
+.md-btn-outlined {
+  background-color: transparent;
+  color: var(--md-primary);
+  border: 1px solid var(--md-primary);
+}
+
+.md-btn-outlined:hover {
+  background-color: rgba(33, 150, 243, 0.08);
+}
+
+.md-btn-text {
+  background-color: transparent;
+  color: var(--md-primary);
+  padding: 8px 16px;
+}
+
+.md-btn-text:hover {
+  background-color: rgba(33, 150, 243, 0.08);
+}
+
+/* ===== Pola tekstowe (Text Fields) ===== */
+.md-textfield {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.md-textfield label {
+  position: absolute;
+  left: 0;
+  top: 24px;
+  font-size: 16px;
+  color: rgba(0,0,0,0.6);
+  transition: all 0.3s;
+  pointer-events: none;
+}
+
+.md-textfield input, 
+.md-textfield textarea {
+  width: 100%;
+  padding: 24px 0 8px 0;
+  font-size: 16px;
+  border: none;
+  border-bottom: 1px solid rgba(0,0,0,0.42);
+  background-color: transparent;
+  transition: border-color 0.3s;
+}
+
+.md-textfield input:focus, 
+.md-textfield textarea:focus {
+  outline: none;
+  border-bottom: 2px solid var(--md-primary);
+}
+
+.md-textfield input:focus + label,
+.md-textfield input:not(:placeholder-shown) + label,
+.md-textfield textarea:focus + label,
+.md-textfield textarea:not(:placeholder-shown) + label {
+  top: 4px;
+  font-size: 12px;
+  color: var(--md-primary);
+}
+
+/* ===== Animacje ===== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.md-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.md-scale-in {
+  animation: scaleIn 0.3s ease-out forwards;
+}
+
+/* ===== Nawigacja (Navigation) ===== */
+.md-nav-rail {
+  display: flex;
+  flex-direction: column;
+  width: 80px;
+  height: 100%;
+  background-color: var(--md-surface);
+  box-shadow: var(--md-elevation-1);
+}
+
+.md-nav-rail-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  color: rgba(0,0,0,0.6);
+  transition: color 0.3s, background-color 0.3s;
+  cursor: pointer;
+}
+
+.md-nav-rail-item.active {
+  color: var(--md-primary);
+  border-left: 3px solid var(--md-primary);
+}
+
+.md-nav-rail-item:hover {
+  background-color: rgba(0,0,0,0.04);
+}
+
+.md-nav-rail-item i {
+  font-size: 24px;
+  margin-bottom: 4px;
+}
+
+.md-nav-rail-item span {
+  font-size: 12px;
+  text-align: center;
+}
+
+/* ===== Paginacja ===== */
+.md-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 16px 0;
+}
+
+.md-pagination-item {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 4px;
+  border-radius: 50%;
+  font-family: var(--md-font-family);
+  font-size: 14px;
+  color: rgba(0,0,0,0.87);
+  transition: background-color 0.3s;
+  cursor: pointer;
+}
+
+.md-pagination-item:hover {
+  background-color: rgba(0,0,0,0.08);
+}
+
+.md-pagination-item.active {
+  background-color: var(--md-primary);
+  color: var(--md-on-primary);
+}
+
+/* ===== Tooltip ===== */
+.md-tooltip {
+  position: relative;
+}
+
+.md-tooltip:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(97, 97, 97, 0.9);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  z-index: 1000;
+}
+
+/* ===== Chips ===== */
+.md-chip {
+  display: inline-flex;
+  align-items: center;
+  height: 32px;
+  padding: 0 12px;
+  border-radius: 16px;
+  background-color: #E0E0E0;
+  font-size: 13px;
+  font-weight: 500;
+  margin: 4px;
+  transition: background-color 0.3s;
+}
+
+.md-chip:hover {
+  background-color: #D5D5D5;
+}
+
+.md-chip-icon {
+  margin-right: 8px;
+  font-size: 16px;
+}
+
+.md-chip-close {
+  margin-left: 8px;
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.md-chip-close:hover {
+  opacity: 1;
+}
+
+/* ===== Formularze ===== */
+.md-form {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 24px;
+  border-radius: var(--md-radius-medium);
+  background-color: var(--md-surface);
+  box-shadow: var(--md-elevation-1);
+}
+
+.md-form-title {
+  font-family: var(--md-font-family-display);
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 24px;
+  color: var(--md-on-surface);
+}
+
+/* ===== Adapatcja Streamlit ===== */
+/* Dopasowanie stylu Streamlit do Material 3 */
+.stButton > button {
+  font-family: var(--md-font-family) !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.5px !important;
+  text-transform: uppercase !important;
+  border-radius: var(--md-radius-large) !important;
+  transition: all 0.3s !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* Style dla przycisków przy różnych stanach - poprawa widoczności tekstu */
+.stButton > button:hover {
+  color: #000000 !important; /* Czarny tekst */
+  font-weight: bold !important;
+}
+
+/* Przyciski w sidebarze - niebieskie tło */
+[data-testid="stSidebar"] .stButton > button:hover {
+  color: #FFFFFF !important; /* Biały tekst na niebieskim tle */
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.5) !important; /* Cień tekstu dla lepszej widoczności */
+  font-weight: bold !important;
+}
+
+/* Przyciski z niebieskim tłem - kontrastowy tekst */
+.stButton > button[type="primary"]:hover {
+  color: #FFFFFF !important;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.5) !important;
+  font-weight: bold !important;
+}
+
+.css-1a1fmpi, .css-15tx938 {
+  font-family: var(--md-font-family-display) !important;
+}
+
+.stTextInput input, .stTextArea textarea {
+  border-radius: var(--md-radius-small) !important;
+  transition: all 0.3s !important;
+}
+
+.stTextInput input:focus, .stTextArea textarea:focus {
+  border-color: var(--md-primary) !important;
+  box-shadow: 0 0 0 1px var(--md-primary) !important;
+}
+
+/* Dostosowanie kart */
+.element-container {
+  transition: transform 0.3s ease !important;
+}
+
+/* Dostosowanie sidebaru */
+.css-1d391kg {
+  background-color: var(--md-surface) !important;
+  border-right: 1px solid rgba(0,0,0,0.05) !important;
+}
+
+/* Dostosowanie menu */
+.stSelectbox, .stMultiSelect {
+  border-radius: var(--md-radius-small) !important;
+}
+
+/* Dostosowanie kolorów */
+a {
+  color: var(--md-primary) !important;
+}
+
+.stProgress > div > div {
+  background-color: var(--md-primary) !important;
+}
+
+/* Efekty cieniowania dla kontenerów */
+.stTabs {
+  border-radius: var(--md-radius-medium) !important;
+  overflow: hidden !important;
+  box-shadow: var(--md-elevation-1) !important;
+}
+
+/* Animacje dla zawartości */
+.main .block-container {
+  animation: fadeIn 0.5s ease-out forwards !important;
+}
