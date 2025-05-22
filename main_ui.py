@@ -18,7 +18,7 @@ try:
     from utils.ui import initialize_ui, theme_selector
     from utils.ui.components.interactive import zen_button, notification
     from utils.ui.components.text import zen_header    # Importy starych modułów (które jeszcze nie zostały zmigrowane)
-    from views.login import show_login_page
+    from views.login_ui import show_login
     from views.lesson import show_lesson
     
     # Import nowych modułów zgodnych z CSP
@@ -121,7 +121,7 @@ def main():
                 
     # Page routing
     if not st.session_state.logged_in:
-        show_login_page()    
+        show_login()    
     else:
         if st.session_state.page == 'dashboard':
             show_dashboard()

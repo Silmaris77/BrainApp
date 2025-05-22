@@ -28,7 +28,7 @@ def show_login_page():
     load_login_css()
     
     # Znajdź logo
-    logo_path = os.path.join("assets", "images", "zen_degen_logo.png")
+    logo_path = os.path.join("assets", "images", "brain.png")
     
     # Podziel ekran na dwie kolumny o równej szerokości
     col1, col2 = st.columns([1, 1], gap="large")
@@ -46,7 +46,7 @@ def show_login_page():
         
         # Wycentrowane tytuł i hasło pod logo
         # st.markdown("<h1 style='text-align: center; margin-bottom: 0;'>ZEN DEGEN ACADEMY</h1>", unsafe_allow_html=True)
-        st.markdown("<p class='app-subtitle'>Balans i mądrość w świecie inwestycji</p>", unsafe_allow_html=True)
+        st.markdown("<p class='app-subtitle'>Poznaj tajemnice mózgu i wykorzystaj je w zarządzaniu</p>", unsafe_allow_html=True)
     
     with col2:
         # Tytuł formularza wycentrowany

@@ -94,16 +94,17 @@ def content_section(title, content, collapsed=True, icon=None, border_color=None
     
     st.markdown(section_html, unsafe_allow_html=True)
 
-def section_container(title):
+def section_container(title=None):
     """
-    Tworzy sekcję z tytułem jako kontekstowy menedżer.
+    Tworzy sekcję z opcjonalnym tytułem jako kontekstowy menedżer.
     
     Parametry:
-    - title: Tytuł sekcji
+    - title: Tytuł sekcji (opcjonalnie)
     
     Użycie:
     with section_container("Tytuł"):
         st.write("Zawartość")
     """
-    st.markdown(f"## {title}")
+    if title:
+        st.markdown(f"## {title}")
     return st.container()
