@@ -1,0 +1,230 @@
+import streamlit as st
+import os
+import sys
+import traceback
+from config.settings import PAGE_CONFIG
+
+# Ta funkcja musi być wywołana jako pierwsza funkcja Streamlit
+st.set_page_config(**PAGE_CONFIG)
+
+# Ścieżka do głównego katalogu aplikacji (dla importów)
+APP_DIR = os.path.dirname(os.path.abspath(__file__))
+if APP_DIR not in sys.path:
+    sys.path.append(APP_DIR)
+
+# Pozostały import - próbujemy z obsługą błędów
+try:
+    from utils.session import init_session_state, clear_session
+    from utils.components import zen_header, navigation_menu
+    from views.login import show_login_page
+    
+    # Import standardowych widoków
+    from views.dashboard import show_dashboard
+    from views.degen_test import show_degen_test
+    from views.neuroleader_test import show_neuroleader_test
+    from views.lesson import show_lesson
+    from views.profile import show_profile
+    from views.neuroleader_explorer import show_neuroleader_explorer
+    from views.degen_explorer import show_degen_explorer
+    from views.skills_new import show_skill_tree
+    from views.admin import show_admin_dashboard
+    
+    # Import widoków z nowym Card Layout
+    from views.dashboard_card_layout import show_dashboard as show_dashboard_card
+    from views.neuroleader_test_card_layout import show_neuroleader_test_card_layout
+    from views.neuroleader_explorer_card_layout import show_neuroleader_explorer as show_neuroleader_explorer_card
+    from views.degen_test_card_layout import show_degen_test_card_layout
+    from views.profile_card_layout import show_profile as show_profile_card
+    from views.degen_explorer_card_layout import show_degen_explorer as show_degen_explorer_card
+    
+    # Import shop module is done within the routing section
+except Exception as e:
+    st.error(f"Błąd podczas importowania modułów: {str(e)}")
+    st.code(traceback.format_exc())
+    st.stop()  # Stop execution if imports fail
+
+# Załaduj plik CSS
+def load_css(css_file):
+    with open(css_file, "r", encoding="utf-8") as f:
+        css = f.read()
+    return css
+
+# Ścieżka do pliku CSS
+css_path = os.path.join(os.path.dirname(__file__), "static", "css", "style.css")
+css = load_css(css_path)
+st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
+
+# Załaduj nowy plik CSS dla Card-Based Grid + Sidebar
+card_layout_css_path = os.path.join(os.path.dirname(__file__), "static", "css", "card_layout.css")
+try:
+    card_layout_css = load_css(card_layout_css_path)
+    st.markdown(f"<style>{card_layout_css}</style>", unsafe_allow_html=True)
+except Exception as e:
+    st.warning(f"Błąd podczas ładowania pliku CSS card_layout.css: {str(e)}")
+
+def main():
+    # Initialize session state
+    init_session_state()
+    
+    # Set card layout flag if not set
+    if 'use_card_layout' not in st.session_state:
+        st.session_state.use_card_layout = True  # Default to using card layout
+    
+    # Sidebar for logged-in users
+    if st.session_state.logged_in:
+        with st.sidebar:
+            st.markdown(f"### Witaj, {st.session_state.username}!")
+            
+            # Layout toggle (for demo purposes)
+            layout_label = "Używaj tradycyjnego wyglądu" if st.session_state.use_card_layout else "Używaj Card Layout"
+            if st.checkbox(layout_label):
+                st.session_state.use_card_layout = not st.session_state.use_card_layout
+                st.rerun()
+            
+            # Nawigacja
+            navigation_menu()
+            
+            # Przycisk wylogowania na dole sidebara
+            if st.button("Wyloguj się", key="logout_button"):
+                clear_session()
+                st.rerun()
+    
+    # Page routing
+    if not st.session_state.logged_in:
+        show_login_page()    
+    else:
+        if st.session_state.page == 'dashboard':
+            if st.session_state.use_card_layout:
+                show_dashboard_card()
+            else:
+                show_dashboard()
+        elif st.session_state.page == 'degen_test':
+            if st.session_state.use_card_layout:
+                show_degen_test_card_layout()
+            else:
+                show_degen_test()
+        elif st.session_state.page == 'neuroleader_test':
+            if st.session_state.use_card_layout:
+                show_neuroleader_test_card_layout()
+            else:
+                show_neuroleader_test()
+        elif st.session_state.page == 'lesson':
+            if st.session_state.use_card_layout:
+                # Import card layout version of lesson
+                from views.lesson_card_layout import show_lesson as show_lesson_card
+                show_lesson_card()
+            else:
+                show_lesson()
+        elif st.session_state.page == 'profile':
+            if st.session_state.use_card_layout:
+                show_profile_card()
+            else:
+                show_profile()
+        elif st.session_state.page == 'neuroleader_explorer':
+            if st.session_state.use_card_layout:
+                show_neuroleader_explorer_card()
+            else:
+                show_neuroleader_explorer()
+        elif st.session_state.page == 'degen_explorer':
+            if st.session_state.use_card_layout:
+                show_degen_explorer_card()
+            else:
+                show_degen_explorer()
+        elif st.session_state.page == 'skills':
+            if st.session_state.use_card_layout:
+                # Import card layout version of skills
+                from views.skills_card_layout import show_skill_tree as show_skill_tree_card
+                show_skill_tree_card()
+            else:
+                show_skill_tree()
+        elif st.session_state.page == 'shop':
+            if st.session_state.use_card_layout:
+                # Import card layout version of shop
+                from views.shop_card_layout import show_shop as show_shop_card
+                show_shop_card()
+            else:
+                try:
+                    # Direct import to ensure we only use the new shop
+                    import views.shop_new
+                    views.shop_new._IS_SHOP_NEW_LOADED = False  # Reset flag each time
+                    from views.shop_new import show_shop
+                    show_shop()
+                except Exception as e:
+                    st.error(f"Błąd podczas ładowania sklepu: {e}")
+                    import traceback
+                    st.code(traceback.format_exc())
+        elif st.session_state.get('page') == 'admin':
+            if st.session_state.use_card_layout:
+                # Import card layout version of admin dashboard
+                from views.admin_card_layout import show_admin_dashboard as show_admin_dashboard_card
+                show_admin_dashboard_card()
+            else:
+                show_admin_dashboard()
+
+# Apply additional styling for card-based layout
+st.markdown("""
+<style>
+div.stButton > button { 
+    margin-bottom: 1px; 
+}
+
+/* Poprawa widoczności tekstu w przyciskach przy różnych stanach */
+div.stButton > button:hover {
+    color: #000000 !important; /* Czarny tekst dla lepszego kontrastu */
+    font-weight: bold;
+}
+
+/* Przyciski z niebieskim tłem */
+section[data-testid="stSidebar"] div.stButton > button:hover,
+div.stButton > button[kind="primary"]:hover {
+    color: black !important; /* Biały tekst na niebieskim tle */
+    text-shadow: 0 0 2px rgba(0,0,0,0.5); /* Cień tekstu dla lepszej widoczności */
+    font-weight: bold;
+}
+
+/* Przyciski w aplikacji - "POKAŻ LEK", "ANALITYKA" itp. */
+button[kind="secondary"] {
+    color: black !important;
+    text-shadow: 0 0 2px rgba(0,0,0,0.5); 
+    font-weight: bold !important;
+}
+
+button[kind="secondary"]:hover {
+    color: white !important;
+    background-color: var(--primary-color) !important;
+}
+
+/* Style poprawiające responsywność na urządzeniach mobilnych */
+@media (max-width: 768px) {
+    /* Zwiększenie obszaru klikalnego dla elementów rozwijanego menu */
+    .st-expander {
+        padding: 10px 0;
+    }
+    
+    /* Zwiększenie rozmiaru czcionki w rozwijanym menu */
+    .st-expander .st-expander-header {
+        font-size: 1.2rem !important;
+        padding: 15px 10px !important;
+    }
+    
+    /* Zapewnienie wystarczającej przestrzeni dla zawartości rozwijanej */
+    .st-expander .st-expander-content {
+        padding: 12px !important;
+    }
+    
+    /* Dodanie wyraźnego wskaźnika dotyku */
+    .st-expander .st-expander-header:after {
+        content: '▼';
+        margin-left: 8px;
+        font-size: 0.8rem;
+    }
+    
+    .st-expander.st-expander-expanded .st-expander-header:after {
+        content: '▲';
+    }
+}
+</style>
+""", unsafe_allow_html=True)
+
+if __name__ == "__main__":
+    main()

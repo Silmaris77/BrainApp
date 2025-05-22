@@ -954,3 +954,21 @@ def skill_node(name, icon, level, max_level, description="", unlocked=True, cost
     
     # Zwróć klucz węzła, który może być używany do śledzenia kliknięć
     return node_key
+
+def lesson_button(lesson_id, lesson_title, is_completed, is_available, on_click):
+    """Renderuje przycisk lekcji z odpowiednią ikoną i akcją"""
+    if is_completed:
+        icon = "✅"
+        help_text = "Oznacz jako nieukończoną"
+    elif not is_available:
+        icon = "🔒"
+        help_text = "Lekcja niedostępna"
+        disabled = True
+    else:
+        icon = "▶️"
+        help_text = "Rozpocznij lekcję"
+        disabled = False
+    
+    return st.button(icon, key=f"lesson_{lesson_id}", help=help_text, 
+                    disabled=(not is_available and not is_completed), 
+                    on_click=on_click)

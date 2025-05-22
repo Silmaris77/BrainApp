@@ -1,4 +1,5 @@
 from datetime import datetime
+import streamlit as st
 from data.users import load_user_data, save_user_data
 from utils.notifications import show_notification, show_achievement_notification
 
@@ -87,23 +88,52 @@ def delete_goal(username, goal_id):
     return True
 
 def get_user_goals(username):
-    """Get all goals for a user"""
+    """
+    Pobiera cele użytkownika
+    
+    Args:
+        username (str): Nazwa użytkownika
+    
+    Returns:
+        list: Lista celów użytkownika
+    """
     users_data = load_user_data()
+    
+    # Sprawdź typ username i upewnij się, że jest to string
+    if not isinstance(username, str):
+        if isinstance(username, list) and len(username) > 0:
+            username = username[0]  # Weź pierwszy element, jeśli to lista
+        else:
+            username = str(username) if username is not None else ""
+    
+    # Sprawdź czy użytkownik istnieje w danych
     if username in users_data:
         return users_data[username].get('goals', [])
     return []
 
-def calculate_goal_metrics(username):
-    """Calculate metrics related to user's goals"""
-    goals = get_user_goals(username)
+def calculate_goal_metrics(user_goals=None):
+    """
+    Oblicza metryki celów użytkownika
+    
+    Args:
+        user_goals (list, optional): Lista celów użytkownika. Jeśli None, pobierze cele z obecnego użytkownika
+    
+    Returns:
+        dict: Słownik z metrykami celów
+    """
+    # Jeśli nie podano celów, pobierz je dla aktualnie zalogowanego użytkownika
+    if user_goals is None:
+        username = st.session_state.get('username')
+        goals = get_user_goals(username)
+    else:
+        goals = user_goals
+    
     total_goals = len(goals)
-    completed_goals = sum(1 for goal in goals if goal['completed'])
-    active_goals = sum(1 for goal in goals if not goal['completed'])
-    avg_progress = sum(goal['progress'] for goal in goals) / total_goals if total_goals > 0 else 0
+    completed_goals = sum(1 for goal in goals if goal.get('completed', False))
+    completion_rate = (completed_goals / total_goals) * 100 if total_goals > 0 else 0
     
     return {
         'total': total_goals,
         'completed': completed_goals,
-        'active': active_goals,
-        'avg_progress': avg_progress
+        'completion_rate': completion_rate
     }

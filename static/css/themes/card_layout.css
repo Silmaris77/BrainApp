@@ -1,0 +1,483 @@
+/* Card Layout Theme */
+
+/* Global styling */
+body {
+    font-family: 'Roboto', 'Segoe UI', sans-serif;
+    color: #333;
+    background-color: #f5f7f9;
+}
+
+/* Sidebar styling */
+[data-testid="stSidebar"] {
+    background-color: #ffffff;
+    border-right: 1px solid rgba(0,0,0,0.1);
+}
+
+[data-testid="stSidebar"] > div:first-child {
+    box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+    padding: 1rem 0;
+}
+
+/* Sidebar navigation items */
+[data-testid="stSidebar"] [data-testid="stVerticalBlock"] button[kind="secondary"] {
+    border-radius: 0;
+    text-align: left;
+    padding: 0.75rem 1rem;
+    margin: 0;
+    border: none;
+    transition: background-color 0.2s ease;
+    color: #444;
+    font-weight: 500;
+}
+
+[data-testid="stSidebar"] [data-testid="stVerticalBlock"] button[kind="secondary"]:hover {
+    background-color: rgba(0,0,0,0.05);
+    color: #000;
+}
+
+/* Active sidebar item */
+[data-testid="stSidebar"] [data-testid="stVerticalBlock"] button[kind="secondary"][aria-selected="true"] {
+    border-left: 3px solid var(--primary-color);
+    background-color: rgba(0, 0, 0, 0.1);
+    color: var(--primary-color);
+}
+
+/* Card styling */
+.zen-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-bottom: 1.5rem;
+}
+
+.zen-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.zen-card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.zen-card-header .icon {
+    margin-right: 0.75rem;
+    font-size: 1.4rem;
+}
+
+.zen-card-content {
+    color: #555;
+}
+
+.zen-card-footer {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Stat Cards */
+.stat-card {
+    background-color: white;
+    border-radius: 12px;
+    padding: 1.25rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    text-align: center;
+    transition: all 0.3s;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.12);
+}
+
+.stat-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.stat-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.25rem;
+}
+
+.stat-label {
+    color: #777;
+    font-size: 0.9rem;
+}
+
+/* Mission Cards */
+.mission-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: transform 0.3s;
+}
+
+.mission-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.mission-card.completed {
+    border-left: 4px solid #4CAF50;
+}
+
+.mission-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.mission-badge {
+    font-size: 2rem;
+    margin-right: 1rem;
+}
+
+.mission-title {
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+}
+
+.mission-desc {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.mission-progress-container {
+    height: 10px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.mission-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--primary-color-light));
+    border-radius: 5px;
+    transition: width 0.5s;
+    text-indent: -9999px;
+}
+
+.mission-xp {
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+/* Skill Cards */
+.skill-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 1.25rem;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    margin-bottom: 1.25rem;
+    border-top: 4px solid var(--primary-color);
+    transition: all 0.3s;
+    animation: fadeIn 0.5s ease forwards;
+    animation-delay: calc(var(--card-index, 0) * 100ms);
+    opacity: 0;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.skill-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.skill-card h4 {
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+}
+
+.skill-card-icon {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+}
+
+.level-indicator {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+}
+
+.skill-progress-bar {
+    height: 10px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.skill-progress {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--primary-color-light));
+    border-radius: 5px;
+}
+
+.skill-description {
+    color: #666;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+}
+
+.completed-lessons {
+    color: #888;
+    font-size: 0.85rem;
+}
+
+.skill-card.max-level {
+    border-top-color: #FFD700;
+}
+
+.skill-card.in-progress {
+    border-top-color: var(--primary-color);
+}
+
+.skill-card.not-started {
+    border-top-color: #9E9E9E;
+}
+
+/* Lesson Cards */
+.m3-lesson-card {
+    background-color: white;
+    color: #333;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.m3-lesson-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    opacity: 0.8;
+}
+
+.m3-lesson-card:hover {
+    box-shadow: 0 8px 16px rgba(0,0,0,0.16);
+    transform: translateY(-2px);
+}
+
+.m3-lesson-card-completed::before {
+    background: linear-gradient(90deg, #4CAF50, #8BC34A);
+}
+
+.m3-card-content {
+    position: relative;
+}
+
+.m3-lesson-card h3 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 16px;
+    color: #333;
+}
+
+.m3-lesson-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 16px 0;
+}
+
+.m3-badge {
+    padding: 6px 12px;
+    border-radius: 24px;
+    font-size: 14px;
+    font-weight: 500;
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.m3-description {
+    color: #555;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 16px 0;
+}
+
+.m3-completion-status {
+    font-size: 14px;
+    color: #757575;
+}
+
+.m3-completion-status.m3-completed {
+    color: #4CAF50;
+}
+
+/* Quote and Tip Blocks */
+.quote-block {
+    background-color: #f8f9fa;
+    border-left: 4px solid var(--primary-color);
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 0 5px 5px 0;
+}
+
+.quote-text {
+    font-style: italic;
+    font-size: 16px;
+}
+
+.tip-block {
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 0 5px 5px 0;
+}
+
+.tip-tip {
+    background-color: #e3f4eb;
+    border-left: 4px solid #27ae60;
+}
+
+.tip-warning {
+    background-color: #fef7e6;
+    border-left: 4px solid #f39c12;
+}
+
+.tip-info {
+    background-color: #e6f3fc;
+    border-left: 4px solid #3498db;
+}
+
+.tip-content {
+    display: flex;
+    align-items: flex-start;
+}
+
+.tip-icon {
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+.tip-title {
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+/* Content Section with details/summary instead of JS */
+.content-section {
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.section-header {
+    padding: 1rem;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    user-select: none;
+    outline: none;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.2s;
+}
+
+.section-header:hover {
+    background-color: #f0f0f0;
+}
+
+.section-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.section-content {
+    padding: 1.25rem;
+}
+
+/* Leaderboard */
+.leaderboard-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #fff;
+    border: 1px solid #f0f0f0;
+}
+
+.leaderboard-current {
+    background-color: #f0f7fb;
+    border: 2px solid var(--primary-color);
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .zen-card {
+        padding: 1rem;
+    }
+    
+    .stat-card {
+        padding: 1rem;
+    }
+    
+    .stat-icon {
+        font-size: 2rem;
+    }
+    
+    .stat-value {
+        font-size: 1.5rem;
+    }
+    
+    .mission-card {
+        padding: 1rem;
+    }
+    
+    .mission-badge {
+        font-size: 1.75rem;
+    }
+    
+    .section-header {
+        padding: 0.75rem;
+    }
+    
+    .section-content {
+        padding: 1rem;
+    }
+}

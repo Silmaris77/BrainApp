@@ -97,6 +97,15 @@ THEMES = {
     }
 }
 
+# Card layout configuration
+CARD_LAYOUT_CONFIG = {
+    "primary_color": "#4CAF50",
+    "card_shadow": "0 2px 8px rgba(0,0,0,0.08)",
+    "card_hover_shadow": "0 4px 12px rgba(0,0,0,0.12)",
+    "card_border_radius": "8px",
+    "card_padding": "1.5rem"
+}
+
 # Degen types
 DEGEN_TYPES = {
     "Zen Degen": {

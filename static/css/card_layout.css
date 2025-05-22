@@ -1,0 +1,212 @@
+/* Card-Based Grid + Sidebar Layout with Flat + Material Elements */
+
+/* Global styling */
+body {
+    font-family: 'Roboto', 'Segoe UI', sans-serif;
+    color: #333;
+    background-color: #f5f7f9;
+}
+
+/* Sidebar styling */
+[data-testid="stSidebar"] {
+    background-color: #ffffff;
+    border-right: 1px solid rgba(0,0,0,0.1);
+}
+
+[data-testid="stSidebar"] > div:first-child {
+    box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+    padding: 1rem 0;
+}
+
+/* Sidebar navigation items */
+[data-testid="stSidebar"] [data-testid="stVerticalBlock"] button[kind="secondary"] {
+    border-radius: 0;
+    text-align: left;
+    padding: 0.75rem 1rem;
+    margin: 0;
+    border: none;
+    transition: background-color 0.2s ease;
+    color: #444;
+    font-weight: 500;
+}
+
+[data-testid="stSidebar"] [data-testid="stVerticalBlock"] button[kind="secondary"]:hover {
+    background-color: rgba(0,0,0,0.05);
+    color: #000;
+}
+
+/* Active sidebar item */
+[data-testid="stSidebar"] [data-testid="stVerticalBlock"] button[kind="secondary"][aria-selected="true"] {
+    border-left: 3px solid #4CAF50;
+    background-color: rgba(76, 175, 80, 0.1);
+    color: #4CAF50;
+}
+
+/* Card styling */
+.zen-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(0,0,0,0.08);
+}
+
+.zen-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.zen-card-header {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    align-items: center;
+}
+
+.zen-card-header .icon {
+    margin-right: 0.5rem;
+    font-size: 1.4rem;
+}
+
+.zen-card-content {
+    margin-bottom: 1rem;
+}
+
+.zen-card-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 0.75rem;
+    border-top: 1px solid #f0f0f0;
+}
+
+/* Grid layout for cards */
+.zen-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+/* Material design influences */
+.zen-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 0.6rem 1.2rem;
+    font-weight: 500;
+    letter-spacing: 0.03rem;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    transition: background-color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.12);
+    cursor: pointer;
+}
+
+.zen-button:hover {
+    background-color: #43A047;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16);
+}
+
+.zen-button.secondary {
+    background-color: transparent;
+    color: #4CAF50;
+    border: 1px solid #4CAF50;
+    box-shadow: none;
+}
+
+.zen-button.secondary:hover {
+    background-color: rgba(76, 175, 80, 0.1);
+}
+
+/* Typography */
+h1 {
+    font-weight: 500;
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.5rem;
+}
+
+h2, h3, h4, h5 {
+    font-weight: 500;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+/* Data presentation */
+.data-container {
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    padding: 1rem;
+    border: 1px solid #eaecef;
+}
+
+/* Tabs customization */
+div[data-baseweb="tab-list"] {
+    background-color: transparent;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 1rem;
+}
+
+div[data-baseweb="tab"] {
+    font-weight: 500;
+    color: #666;
+}
+
+div[data-baseweb="tab"][aria-selected="true"] {
+    color: #4CAF50;
+    border-bottom-color: #4CAF50;
+}
+
+/* Progress bars */
+.stProgress > div > div > div {
+    background-color: #4CAF50;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .zen-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .zen-card {
+        padding: 1rem;
+    }
+}
+
+/* Animation effects */
+@keyframes cardEnter {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.zen-card {
+    animation: cardEnter 0.3s ease-out;
+}
+
+/* Additional content boxes */
+.content-box {
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background-color: #f8f9fa;
+    border: 1px solid #eaecef;
+}
+
+.content-box.highlight {
+    background-color: rgba(76, 175, 80, 0.1);
+    border-color: rgba(76, 175, 80, 0.2);
+}

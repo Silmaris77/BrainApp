@@ -1,0 +1,3 @@
+@echo off
+echo Starting Neuroliderzy App with Card-Based Grid + Sidebar Layout...
+streamlit run main_card_layout.py

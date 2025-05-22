@@ -1600,3 +1600,93 @@ def get_available_lessons():
                 st.sidebar.write(f"- {lesson} (tylko ID)")
     
     return available_lessons
+
+# Dodajmy funkcję get_categories, której brakuje
+
+def get_categories():
+    """
+    Zwraca słownik wszystkich kategorii umiejętności.
+    
+    Returns:
+        dict: Słownik kategorii umiejętności
+    """
+    return {
+        "neuroanatomy": {
+            "name": "Neuroanatomia przywództwa",
+            "icon": "🧠",
+            "description": "Podstawy budowy i funkcji mózgu związane z przywództwem",
+            "block": 1
+        },
+        "neurocognition": {
+            "name": "Funkcje poznawcze lidera",
+            "icon": "🔍",
+            "description": "Procesy poznawcze istotne w przywództwie: uwaga, pamięć, podejmowanie decyzji",
+            "block": 1
+        },
+        "neuroplasticity": {
+            "name": "Neuroplastyczność w przywództwie",
+            "icon": "🔄",
+            "description": "Zdolność mózgu do adaptacji i zmiany w kontekście rozwoju umiejętności przywódczych",
+            "block": 1
+        },
+        "decision_making": {
+            "name": "Neurobiologia decyzji",
+            "icon": "⚖️",
+            "description": "Procesy neuronalne towarzyszące podejmowaniu decyzji liderskich",
+            "block": 2
+        },
+        "risk_assessment": {
+            "name": "Ocena ryzyka",
+            "icon": "📊",
+            "description": "Neuronalne podstawy szacowania i zarządzania ryzykiem",
+            "block": 2
+        },
+        "emotional_intelligence": {
+            "name": "Inteligencja emocjonalna",
+            "icon": "❤️",
+            "description": "Rozpoznawanie i zarządzanie emocjami w kontekście przywództwa",
+            "block": 3
+        },
+        "motivation": {
+            "name": "Systemy motywacyjne",
+            "icon": "🚀",
+            "description": "Neurobiologiczne podstawy motywacji i ich znaczenie w przywództwie",
+            "block": 3
+        },
+        "stress_management": {
+            "name": "Zarządzanie stresem",
+            "icon": "🧘",
+            "description": "Wpływ stresu na mózg i techniki zarządzania nim w roli lidera",
+            "block": 3
+        },
+        "communication": {
+            "name": "Neuronauka komunikacji",
+            "icon": "💬",
+            "description": "Neurobiologiczne podstawy efektywnej komunikacji liderskiej",
+            "block": 4
+        },
+        "team_dynamics": {
+            "name": "Dynamika zespołu",
+            "icon": "👥",
+            "description": "Neuronaukowe podejście do budowania i prowadzenia zespołów",
+            "block": 4
+        },
+        "adaptability": {
+            "name": "Adaptacyjność",
+            "icon": "🦎",
+            "description": "Neuroplastyczność i zdolność do adaptacji w zmieniającym się środowisku",
+            "block": 4
+        },
+        "innovation": {
+            "name": "Neurobiologia innowacji",
+            "icon": "💡",
+            "description": "Neuronalne podstawy kreatywności i innowacyjności w przywództwie",
+            "block": 5
+        },
+        "future_leadership": {
+            "name": "Przywództwo przyszłości",
+            "icon": "🔮",
+            "description": "Integracja neurotechnologii z rozwojem umiejętności przywódczych",
+            "block": 5
+        }
+    }
