@@ -65,7 +65,8 @@ def create_card(title, content, icon=None, footer_content=None, key=None, on_cli
             """, unsafe_allow_html=True)
             
             # Hidden button to handle the click
-            st.button("Click", key=f"btn-{key}", on_click=on_click, help="", label_visibility="collapsed")
+
+            st.button("", key=f"btn-{key}", on_click=on_click, help="")
     
     return card_container
 

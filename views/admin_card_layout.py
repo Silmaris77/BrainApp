@@ -274,11 +274,12 @@ def show_users_tab(users_data, num_columns):
                 # Ukryte przyciski do obsługi akcji
                 col1, col2 = st.columns(2)
                 with col1:
-                    if st.button("Edytuj", key=f"btn-edit-{username}", help="", label_visibility="collapsed"):
+                    if st.button("Edytuj", key=f"btn-edit-{username}", help=""):
+                        
                         st.session_state.edit_user = username
                         st.rerun()
                 with col2:
-                    if st.button("Resetuj", key=f"btn-reset-{username}", help="", label_visibility="collapsed"):
+                    if st.button("Resetuj", key=f"btn-reset-{username}", help=""):
                         # Implementacja resetowania hasła
                         st.success(f"Hasło użytkownika {username} zostało zresetowane.")
     
@@ -350,7 +351,7 @@ def show_stats_tab(users_data, num_columns):
             <div style='padding: 10px 0;'>
                 <div id="engagement_chart_placeholder" style='height: 300px; background-color: #f5f5f5; 
                      display: flex; align-items: center; justify-content: center;'>
-                    Tutaj będzie wykres zaangażowania
+                    Tutaj będzie wykres zaangażenia
                 </div>
             </div>
             """,
@@ -440,7 +441,7 @@ def show_stats_tab(users_data, num_columns):
         )
         
         # Ukryty przycisk
-        if st.button("Generuj", key="btn-report-activity", help="", label_visibility="collapsed"):
+        if st.button("Generuj", key="btn-report-activity", help=""):
             # Tutaj logika generowania raportu
             st.info("Generowanie raportu aktywności...")
             # Symulacja generowania raportu
@@ -465,7 +466,7 @@ def show_stats_tab(users_data, num_columns):
         )
         
         # Ukryty przycisk
-        if st.button("Generuj", key="btn-report-progress", help="", label_visibility="collapsed"):
+        if st.button("Generuj", key="btn-report-progress", help=""):
             # Tutaj logika generowania raportu
             st.info("Generowanie raportu postępów...")
             # Symulacja generowania raportu
@@ -500,7 +501,7 @@ def show_config_tab(num_columns):
         )
         
         # Ukryty przycisk
-        if st.button("Edytuj", key="btn-edit-app-settings", help="", label_visibility="collapsed"):
+        if st.button("Edytuj", key="btn-edit-app-settings", help=""):
             st.session_state.edit_app_settings = True
             st.rerun()
     
@@ -523,7 +524,7 @@ def show_config_tab(num_columns):
         )
         
         # Ukryty przycisk
-        if st.button("Zarządzaj", key="btn-manage-lessons", help="", label_visibility="collapsed"):
+        if st.button("Zarządzaj", key="btn-manage-lessons", help=""):
             st.session_state.manage_lessons = True
             st.rerun()
     
@@ -552,13 +553,13 @@ def show_config_tab(num_columns):
         # Ukryte przyciski
         col1, col2 = st.columns(2)
         with col1:
-            if st.button("Utwórz", key="btn-create-backup", help="", label_visibility="collapsed"):
+            if st.button("Utwórz", key="btn-create-backup", help=""):
                 # Symulacja tworzenia kopii zapasowej
                 st.info("Tworzenie kopii zapasowej...")
                 st.success("Kopia zapasowa została utworzona pomyślnie.")
                 
         with col2:
-            if st.button("Przywróć", key="btn-restore-backup", help="", label_visibility="collapsed"):
+            if st.button("Przywróć", key="btn-restore-backup", help=""):
                 st.session_state.restore_backup = True
                 st.rerun()
     
@@ -581,7 +582,7 @@ def show_config_tab(num_columns):
         )
         
         # Ukryty przycisk
-        if st.button("Przeglądaj", key="btn-view-logs", help="", label_visibility="collapsed"):
+        if st.button("Przeglądaj", key="btn-view-logs", help=""):
             # Symulacja wyświetlania logów
             st.info("Ładowanie logów systemu...")
             st.code("""
