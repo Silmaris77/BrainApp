@@ -66,7 +66,7 @@ def tip_block(text, type="tip", title=None, icon=None):
     
     st.markdown(tip_html, unsafe_allow_html=True)
 
-def content_section(title, content, collapsed=True, icon=None, border_color=None):
+def content_section(title, content, collapsed=True, icon=None, border_color=None, escape_html=False):
     """
     Wyświetla sekcję z treścią, wykorzystująca CSS zamiast JavaScript
     
@@ -76,11 +76,26 @@ def content_section(title, content, collapsed=True, icon=None, border_color=None
     - collapsed: Czy sekcja ma być domyślnie zwinięta (obecnie tylko informacyjnie)
     - icon: Emoji lub ikona do wyświetlenia obok tytułu (opcjonalne)
     - border_color: Kolor obramowania sekcji w formacie HEX (opcjonalne)
+    - escape_html: Czy tekst HTML powinien zostać wyrenderowany jako zwykły tekst (domyślnie False)
     """
+    # Zabezpieczenie przed None
+    if title is None:
+        title = ""
+    if content is None:
+        content = ""
+        
+    # Zastosuj ucieczkę dla znaków HTML jeśli potrzebne
+    if escape_html:
+        import html
+        title = html.escape(str(title))
+        content = html.escape(str(content))
+    
+    # Formatowanie zawartości sekcji
     collapsed_class = "collapsed" if collapsed else ""
     icon_html = f'<span class="icon">{icon}</span>' if icon else ""
     style = f'style="border-left-color: {border_color};"' if border_color else ""
     
+    # Tworzenie kompletnej struktury HTML
     section_html = f"""
     <div class="content-section {collapsed_class}" {style}>
         <div class="section-header">
@@ -92,6 +107,7 @@ def content_section(title, content, collapsed=True, icon=None, border_color=None
     </div>
     """
     
+    # Renderuj HTML z ustawionym unsafe_allow_html=True
     st.markdown(section_html, unsafe_allow_html=True)
 
 def section_container(title=None):

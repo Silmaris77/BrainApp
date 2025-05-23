@@ -80,6 +80,9 @@ def responsive_container(content_function):
     
     Parametry:
     - content_function: Funkcja renderująca zawartość
+    
+    Zwraca:
+    - Rezultat wywołania content_function
     """
     device_type = get_device_type()
     
@@ -88,9 +91,11 @@ def responsive_container(content_function):
         st.markdown(f'<div class="responsive-container {device_type}">', unsafe_allow_html=True)
         
         # Wywołaj funkcję renderującą zawartość
-        content_function()
+        result = content_function()
         
         st.markdown('</div>', unsafe_allow_html=True)
+        
+        return result
 
 def responsive_grid(columns_desktop=3, columns_tablet=2, columns_mobile=1):
     """

@@ -24,57 +24,74 @@ def show_login():
     # Inicjalizacja UI
     initialize_ui()
     
-    # Logo aplikacji
-    logo_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "static", "images", "logo.png")
-    logo_base64 = img_to_base64(logo_path)
+    # Podziel ekran na dwie kolumny o równej szerokości
+    col1, col2 = st.columns([1, 1], gap="large")
     
-    if logo_base64:
-        st.markdown(
-            f"""
-            <div class="logo-container">
-                <img src="data:image/png;base64,{logo_base64}" alt="Logo" class="app-logo">
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-    
-    zen_header("BrainApp", "Aplikacja do rozwoju umiejętności przywódczych")
-    
-    # Wybór między logowaniem a rejestracją
-    login_tab, register_tab = st.tabs(["Logowanie", "Rejestracja"])
-    
-    with login_tab:
-        login_username = st.text_input("Nazwa użytkownika", key="login_username")
-        login_password = st.text_input("Hasło", type="password", key="login_password")
+    with col1:
+        # Dodaj odstęp na górze
+        st.write("")
+        st.write("")
         
-        if zen_button("Zaloguj się", key="login_button"):
-            if login_user(login_username, login_password):
-                st.session_state.logged_in = True
-                st.session_state.username = login_username
-                st.session_state.page = "dashboard"
-                st.rerun()
-            else:
-                notification("Nieprawidłowa nazwa użytkownika lub hasło", type="error")
-    
-    with register_tab:
-        register_username = st.text_input("Wybierz nazwę użytkownika", key="register_username")
-        register_email = st.text_input("Email", key="register_email")
-        register_password = st.text_input("Hasło", type="password", key="register_password")
-        register_password2 = st.text_input("Powtórz hasło", type="password", key="register_password2")
+        # Znajdź ścieżkę do obrazka
+        logo_path = os.path.join("assets", "images", "brain.png")
         
-        if zen_button("Zarejestruj się", key="register_button"):
-            if not register_username or not register_password:
-                notification("Proszę wypełnić wszystkie pola", type="warning")
-            elif register_password != register_password2:
-                notification("Hasła nie są identyczne", type="error")
-            else:
-                if register_user(register_username, register_password, register_email):
-                    notification("Konto zostało utworzone! Możesz się teraz zalogować.", type="success")
-                    # Automatyczne logowanie po rejestracji
-                    st.session_state.logged_in = True
-                    st.session_state.username = register_username
-                    st.session_state.page = "dashboard"
-                    st.rerun()
-                else:
-                    notification("Użytkownik o takiej nazwie już istnieje", type="error")
+        # Wyświetl logo
+        if os.path.exists(logo_path):
+            st.image(logo_path, use_container_width=True)
+        else:
+            # Alternatywny widok, jeśli obrazek nie istnieje
+            st.markdown("# 🧠")
+            st.error(f"Nie można znaleźć obrazka pod ścieżką: {logo_path}")
+        
+        # Wycentrowane hasło pod logo
+        st.markdown("<p style='text-align: center; font-size: 1.2rem;'>Poznaj tajemnice mózgu i wykorzystaj je w zarządzaniu</p>", unsafe_allow_html=True)
+    
+    with col2:
+        # Tytuł formularza wycentrowany
+        st.markdown("<h2 style='text-align: center; margin-bottom: 2rem;'>Zaloguj się lub zarejestruj</h2>", unsafe_allow_html=True)
+        
+        # Zakładki Logowanie/Rejestracja
+        login_tab, register_tab = st.tabs(["Logowanie", "Rejestracja"])
+        
+        # Zakładka logowania
+        with login_tab:
+            with st.form("login_form", clear_on_submit=False):
+                username = st.text_input("Nazwa użytkownika")
+                password = st.text_input("Hasło", type="password")
+                submit_login = st.form_submit_button("Zaloguj się", use_container_width=True)
+                
+                if submit_login:
+                    if login_user(username, password):
+                        st.session_state.logged_in = True
+                        st.session_state.username = username
+                        st.session_state.page = 'dashboard'
+                        st.rerun()
+                    else:
+                        st.error("Niepoprawna nazwa użytkownika lub hasło.")
+        
+        # Zakładka rejestracji
+        with register_tab:
+            with st.form("register_form", clear_on_submit=False):
+                new_username = st.text_input("Nazwa użytkownika")
+                new_password = st.text_input("Hasło", type="password")
+                confirm_password = st.text_input("Potwierdź hasło", type="password")
+                submit_register = st.form_submit_button("Zarejestruj się", use_container_width=True)
+                
+                if submit_register:
+                    if not new_username or not new_password:
+                        st.error("Nazwa użytkownika i hasło są wymagane.")
+                    elif new_password != confirm_password:
+                        st.error("Hasła nie pasują do siebie.")
+                    else:
+                        registration_successful = register_user(new_username, new_password, confirm_password)
+                        
+                        if registration_successful:
+                            st.success("Rejestracja udana! Możesz się teraz zalogować.")
+                            # Automatyczne logowanie po rejestracji
+                            st.session_state.logged_in = True
+                            st.session_state.username = new_username
+                            st.session_state.page = 'dashboard'
+                            st.rerun()
+                        else:
+                            st.error("Nazwa użytkownika jest już zajęta.")
 

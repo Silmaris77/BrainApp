@@ -22,7 +22,6 @@ try:
     from views.lesson import show_lesson
     
     # Import nowych modułów zgodnych z CSP
-    from views.degen_test_ui import show_degen_test
     from views.neuroleader_test_ui import show_neuroleader_test
     from views.neuroleader_explorer_ui import show_neuroleader_explorer
     
@@ -72,11 +71,11 @@ def main():
                 st.session_state.page = "dashboard"
                 st.rerun()
                 
-            if zen_button("🧠 TEST DEGENA", key="nav_degen_test"):
-                st.session_state.page = "degen_test"
-                st.rerun()
+            # if zen_button("🧠 TEST DEGENA", key="nav_degen_test"):
+            #     st.session_state.page = "degen_test"
+            #     st.rerun()
                 
-            if zen_button("🧩 TEST NEUROLIDERERA", key="nav_neuroleader_test"):
+            if zen_button("🧩 TEST NEUROLIDERA", key="nav_neuroleader_test"):
                 st.session_state.page = "neuroleader_test"
                 st.rerun()
                 
@@ -125,8 +124,6 @@ def main():
     else:
         if st.session_state.page == 'dashboard':
             show_dashboard()
-        elif st.session_state.page == 'degen_test':
-            show_degen_test()
         elif st.session_state.page == 'neuroleader_test':
             show_neuroleader_test()
         elif st.session_state.page == 'lesson':

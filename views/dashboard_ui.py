@@ -22,6 +22,11 @@ from utils.ui.components.text import content_section, zen_header
 from utils.ui.layouts.grid import responsive_grid, render_dashboard_header
 from utils.ui.components.cards import stat_card
 
+def content_section_fixed(title, content):
+    """Tymczasowa poprawka dla funkcji content_section"""
+    st.markdown(f"### {title}")
+    st.markdown(content, unsafe_allow_html=True)
+
 def calculate_xp_progress(user_data):
     """Calculate XP progress and dynamically determine the user's level"""
     # Dynamically determine the user's level based on XP
@@ -261,9 +266,9 @@ def show_dashboard():
     
     # Lewy panel - Profil/XP
     with profile_cols[0]:
-        content_section(
-            title="Postęp w doświadczeniu",
-            content=f"""
+        content_section_fixed(
+            "Postęp w doświadczeniu",
+            f"""
             <div style='margin-bottom: 10px'>
                 <span style='font-size: 24px'>⭐ Poziom {user_data.get('level', 1)}</span>
                 <span style='float: right'>XP: {user_data.get('xp', 0)}</span>
@@ -273,87 +278,82 @@ def show_dashboard():
             </div>
             <div style='text-align: right; margin-top: 5px'>{xp_to_next_level} XP do poziomu {user_data.get('level', 1) + 1}</div>
             """
-        )        # Wyświetl wykresy Degen i Neurolider
-        content_section(
-            title="Twój profil Degena",
-            content=""
         )
         
-        if 'degen_scores' in user_data and user_data['degen_scores']:
-            # Użyj plot_degen_radar_chart do wyświetlenia wykresu
-            fig = plot_degen_radar_chart(user_data['degen_scores'])
-            st.pyplot(fig)
-            
-        content_section(
-            title="Twój profil Neuroleader",
-            content=""
-        )
+        # Dodaj zakładki dla testów i profili
+        profile_tabs = st.tabs(["🧠 Test Neuroleadera", "📊 Statystyki", "🏆 Osiągnięcia"])
         
-        if 'neuroleader_scores' in user_data and user_data['neuroleader_scores']:
-            # Użyj plot_neuroleader_radar_chart do wyświetlenia wykresu
-            fig = plot_neuroleader_radar_chart(user_data['neuroleader_scores'])
-            st.pyplot(fig)
-      # Prawy panel - Misje dzienne i cele
-    with profile_cols[1]:
-        content_section(
-            title="Misje dzienne",
-            content=""
-        )
-        
-        # Wyświetl misje dzienne
-        for mission_id, mission_data in enumerate(DAILY_MISSIONS):
-            mission_key = mission_data.get('id', f'mission_{mission_id}')
-            mission_progress = daily_missions_progress.get(mission_key, 
-                                {'complete': False, 
-                                 'progress': 0, 
-                                 'target': mission_data.get('target', 1)})
-            progress_pct = int((mission_progress['progress'] / mission_progress['target']) * 100)
-            
-            st.markdown(f"""
-            <div style='margin-bottom: 15px;'>
-                <div>
-                    <span style='font-weight: bold;'>{mission_data.get('description', 'Misja dzienna')}</span>
-                    <span style='float: right;'>{mission_progress['progress']}/{mission_progress['target']}</span>
-                </div>
-                <div style='height: 10px; background-color: rgba(255,255,255,0.1); border-radius: 5px; margin-top: 5px;'>
-                    <div style='height: 10px; width: {progress_pct}%; 
-                         background-color: {"#4CAF50" if mission_progress["complete"] else "#2196F3"}; 
-                         border-radius: 5px;'></div>
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
-        
-        # Wyświetl cele użytkownika
-        content_section(
-            title="Twoje cele",
-            content=""
-        )
-        
-        if not user_goals:
-            st.info("Nie ustawiłeś jeszcze żadnych celów.")
-        else:
-            for goal in user_goals:
-                # Używamy metody get() dla wszystkich kluczy, aby uniknąć KeyError
-                current = goal.get('current', 0)
-                target = goal.get('target', 1)
-                title = goal.get('title', 'Cel bez nazwy')
-                complete = goal.get('complete', False)
+        with profile_tabs[0]:
+            neuroleader_type = user_data.get('tests', {}).get('neuroleader', {}).get('type', None)
+            neuroleader_scores = user_data.get('tests', {}).get('neuroleader', {}).get('scores', None)
+
+            if neuroleader_type and neuroleader_scores:
+                # Pobierz opis typu neuroleadera
+                neuroleader_description = NEUROLEADER_TYPES.get(neuroleader_type, {}).get('description', '')
                 
-                progress_pct = int((current / target) * 100) if target > 0 else 0
+                # Tytuł z typem
+                st.markdown(f"### Twój typ: {neuroleader_type}")
                 
-                st.markdown(f"""
-                <div style='margin-bottom: 15px;'>
-                    <div>
-                        <span style='font-weight: bold;'>{title}</span>
-                        <span style='float: right;'>{current}/{target}</span>
-                    </div>
-                    <div style='height: 10px; background-color: rgba(255,255,255,0.1); border-radius: 5px; margin-top: 5px;'>
-                        <div style='height: 10px; width: {progress_pct}%; 
-                             background-color: {"#4CAF50" if complete else "#2196F3"}; 
-                             border-radius: 5px;'></div>
-                    </div>
-                </div>
-                """, unsafe_allow_html=True)
+                # Dodaj wykres radarowy
+                if neuroleader_scores:
+                    try:
+                        fig = plot_neuroleader_radar_chart(neuroleader_scores)
+                        st.pyplot(fig)
+                    except Exception as e:
+                        st.error(f"Nie udało się wygenerować wykresu: {str(e)}")
+                
+                # Krótki opis typu
+                st.markdown(f"{neuroleader_description[:200]}...")
+                
+                # Mocne strony i wyzwania
+                col1, col2 = st.columns(2)
+                
+                with col1:
+                    st.markdown("#### Mocne strony:")
+                    strongest = max(neuroleader_scores.items(), key=lambda x: x[1])[0]
+                    st.markdown(f"- **{strongest}**")
+                    st.markdown("- Strategiczne myślenie")
+                    st.markdown("- Analiza danych")
+                
+                with col2:
+                    st.markdown("#### Obszary do rozwoju:")
+                    weakest = min(neuroleader_scores.items(), key=lambda x: x[1])[0]
+                    st.markdown(f"- **{weakest}**")
+                    st.markdown("- Komunikacja emocjonalna")
+                    st.markdown("- Elastyczność")
+                
+                # Przycisk do pełnego raportu
+                if zen_button("Zobacz pełny raport", key="see_full_neuroleader_report"):
+                    st.session_state.page = "neuroleader_explorer"
+                    st.rerun()
+            else:
+                st.markdown("### Nie wykonałeś jeszcze testu Neuroleadera")
+                st.markdown("Wykonaj test, aby poznać swój profil przywództwa neurobiologicznego!")
+                
+                if zen_button("Wykonaj test Neuroleader", key="start_neuroleader_test_tab"):
+                    st.session_state.page = "neuroleader_test"
+                    st.rerun()
+        
+        with profile_tabs[1]:
+            st.markdown("### Twoje statystyki")
+            
+            # Podstawowe statystyki w formie tabeli
+            stats_data = {
+                "Ukończone lekcje": len(user_data.get('completed_lessons', [])),
+                "Zdobyte punkty XP": user_data.get('xp', 0),
+                "Wykonane testy": len(user_data.get('tests', {})),
+                "Dni aktywności": user_data.get('login_days', 0)
+            }
+            
+            # Wyświetl statystyki
+            for key, value in stats_data.items():
+                st.metric(key, value)
+        
+        with profile_tabs[2]:
+            st.markdown("### Twoje osiągnięcia")
+            
+            # Jeśli nie ma jeszcze osiągnięć
+            st.info("Ta funkcja będzie dostępna wkrótce!")
     
     # Lekcje i rankingi
     
