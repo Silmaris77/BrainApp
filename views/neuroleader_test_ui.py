@@ -166,7 +166,7 @@ def plot_radar_chart(scores, device_type=None):
     # Tworzenie i konfiguracja wykresu
     fig, ax = plt.subplots(figsize=fig_size, subplot_kw=dict(polar=True))
     
-    # Dodaj przezroczyste tło za etykietami dla lepszej czytelności
+    # Dodaj przezroczyste tło za etykietami dla lepszego czytelności
     ax.set_facecolor('white')
     if device_type == 'mobile':
         # Na telefonach zwiększ kontrast
@@ -278,6 +278,11 @@ def handle_test_completion(scores):
             'scores': scores,
             'type': dominant_type
         }
+        
+        # Dodane: Zapisz też wyniki w głównej strukturze danych użytkownika,
+        # aby były dostępne w zakładce Profil/Typ Neurolidera
+        users_data[username]['neuroleader_type'] = dominant_type
+        users_data[username]['neuroleader_scores'] = scores
         
         # Mark test as completed for badges
         if 'completed_tasks' not in users_data[username]:

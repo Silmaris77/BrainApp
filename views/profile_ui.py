@@ -8,9 +8,9 @@ from datetime import datetime, timedelta
 import time
 
 # Import danych
-from data.test_questions import DEGEN_TYPES
+
 from data.users import load_user_data, save_user_data
-from data.degen_details import degen_details
+
 from config.settings import USER_AVATARS, THEMES, BADGES
 
 # Import nowego systemu UI
@@ -42,8 +42,10 @@ from utils.inventory import (
     is_booster_active,
     format_time_remaining
 )
-from views.degen_test import plot_radar_chart
-from views.dashboard import calculate_xp_progress
+
+from views.dashboard_ui import calculate_xp_progress
+from views.neuroleader_test import plot_radar_chart
+from data.neuroleader_types import NEUROLEADER_TYPES
 
 def show_profile():
     """
@@ -78,8 +80,7 @@ def show_profile():
     st.markdown(generate_user_css(username), unsafe_allow_html=True)
     
     # Setup data for user stats panel
-    avatar = style.get('avatar', 'default')
-    degen_type = user_data.get('degen_type', 'Typ nie określony')
+
     level = user_data.get('level', 1)
     xp = user_data.get('xp', 0)
     completed = len(user_data.get('completed_lessons', []))
@@ -90,10 +91,7 @@ def show_profile():
     # Display user stats using the new UI components
     with st.container():
         col1, col2, col3 = st.columns([1, 2, 1])
-        with col2:
-            st.markdown(f"### {USER_AVATARS.get(avatar, '👤')} {username}")
-            st.markdown(f"**Typ:** {degen_type}")
-            
+        
         col1, col2, col3 = st.columns(3)
         with col1:
             stat_card(level, "Poziom", "📊")
@@ -105,7 +103,7 @@ def show_profile():
         progress_bar(xp_progress, f"{xp_needed} XP do poziomu {level + 1}")
     
     # Create tabs
-    tab_options = ["Personalizacja", "Ekwipunek", "Odznaki", "Typ Degena"]
+    tab_options = ["Personalizacja", "Ekwipunek", "Odznaki", "Typ Neuroliderera"]
     
     if 'profile_tab' not in st.session_state:
         st.session_state.profile_tab = "Personalizacja"
@@ -130,8 +128,9 @@ def show_profile():
         show_inventory_tab(username, device_type, num_columns)
     elif st.session_state.profile_tab == "Odznaki":
         show_badges_tab(user_data, device_type, num_columns)
-    elif st.session_state.profile_tab == "Typ Degena":
-        show_degen_type_tab(user_data, device_type, num_columns)
+    elif st.session_state.profile_tab == "Typ Neuroliderera":
+        show_neuroleader_type_tab(user_data, device_type, num_columns)
+
 
 def set_profile_tab(tab):
     """Ustawia aktywną zakładkę profilu"""
@@ -198,27 +197,63 @@ def show_inventory_tab(username, device_type, num_columns):
                     item_data = inventory[item_id]
                     
                     with cols[col]:
-                        st.subheader(f"{item_data.get('icon', '🎁')} {item_data.get('name', 'Przedmiot')}")
-                        st.markdown(f"{item_data.get('description', 'Brak opisu')}")
+                        # Sprawdź, jakiego typu jest item_data i obsłuż odpowiednio
+                        if isinstance(item_data, dict):
+                            # Jeśli item_data to słownik, użyj metody get()
+                            icon = item_data.get('icon', '🎁')
+                            name = item_data.get('name', 'Przedmiot')
+                            description = item_data.get('description', 'Brak opisu')
+                            item_type = item_data.get('type', 'Zwykły')
+                            bonus = item_data.get('bonus', '0')
+                            quantity = item_data.get('quantity', 1)
+                        elif isinstance(item_data, list) and len(item_data) >= 5:
+                            # Jeśli item_data to lista, dostęp przez indeksy
+                            icon = item_data[0] if len(item_data) > 0 else '🎁'
+                            name = item_data[1] if len(item_data) > 1 else 'Przedmiot'
+                            description = item_data[2] if len(item_data) > 2 else 'Brak opisu'
+                            item_type = item_data[3] if len(item_data) > 3 else 'Zwykły'
+                            bonus = item_data[4] if len(item_data) > 4 else '0'
+                            quantity = item_data[5] if len(item_data) > 5 else 1
+                        else:
+                            # Domyślne wartości, jeśli format danych jest nieznany
+                            icon = '🎁'
+                            name = f'Przedmiot {item_id}'
+                            description = 'Brak opisu'
+                            item_type = 'Zwykły'
+                            bonus = '0'
+                            quantity = 1
+                        
+                        st.subheader(f"{icon} {name}")
+                        st.markdown(f"{description}")
                         
                         col1, col2, col3 = st.columns(3)
                         with col1:
-                            st.markdown(f"**Typ:** {item_data.get('type', 'Zwykły')}")
+                            st.markdown(f"**Typ:** {item_type}")
                         with col2:
-                            st.markdown(f"**Bonus:** {item_data.get('bonus', '0')}%")
+                            st.markdown(f"**Bonus:** {bonus}%")
                         with col3:
-                            st.markdown(f"**Ilość:** {item_data.get('quantity', 1)}")
+                            st.markdown(f"**Ilość:** {quantity}")
                         
                         # Check if the item is active
-                        is_active = is_booster_active(username, item_id)
+                        is_active, expiration_str = is_booster_active(username, item_id)
                         
+                        # Te warunki powinny być wewnątrz bloku "with cols[col]:"
                         if is_active:
-                            remaining_time = format_time_remaining(username, item_id)
+                            remaining_time = format_time_remaining(expiration_str)
                             st.success(f"Aktywny - Pozostały czas: {remaining_time}")
                         else:
                             if zen_button(f"Aktywuj", key=f"activate_btn_{item_id}"):
-                                activate_item(username, item_id)
-                                notification(f"Przedmiot {item_data.get('name', '')} został aktywowany!", type="success")
+                                # Określ typ przedmiotu
+                                item_type = "booster"  # lub pobierz prawidłowy typ z danych przedmiotu
+                                
+                                # Wywołaj funkcję z trzema parametrami
+                                success, message = activate_item(username, item_type, item_id)
+                                
+                                if success:
+                                    notification(f"Przedmiot {name} został aktywowany!", type="success")
+                                else:
+                                    notification(message, type="error")
+                                
                                 st.rerun()
 
 def show_badges_tab(user_data, device_type, num_columns):
@@ -227,13 +262,16 @@ def show_badges_tab(user_data, device_type, num_columns):
     # Get user badges
     user_badges = user_data.get('badges', [])
     
+    # Zdefiniuj badges_per_row na samym początku funkcji
+    badges_per_row = num_columns
+    
     if not user_badges:
         st.info("Nie masz jeszcze odznak. Wykonuj zadania i zdobywaj osiągnięcia, aby odblokować odznaki!")
     else:
         st.subheader("Zdobyte odznaki")
         
-        # Create responsive grid for badges
-        badges_per_row = num_columns
+        # Usuń tę linię, bo teraz badges_per_row jest zdefiniowane wcześniej
+        # badges_per_row = num_columns
         
         for i in range(0, len(user_badges), badges_per_row):
             cols = st.columns(badges_per_row)
@@ -256,7 +294,7 @@ def show_badges_tab(user_data, device_type, num_columns):
     if not available_badges:
         st.success("Gratulacje! Zdobyłeś wszystkie dostępne odznaki.")
     else:
-        # Create responsive grid for available badges
+        # Teraz badges_per_row jest zawsze zdefiniowane
         for i in range(0, len(available_badges), badges_per_row):
             cols = st.columns(badges_per_row)
             for j in range(badges_per_row):
@@ -268,60 +306,70 @@ def show_badges_tab(user_data, device_type, num_columns):
                         st.markdown(f"{badge_data.get('description', 'Brak opisu')}")
                         st.caption(f"**Wymagania:** {badge_data.get('requirement', 'Nieznane')}")
 
-def show_degen_type_tab(user_data, device_type, num_columns):
-    zen_header("Twój typ degena")
+def show_neuroleader_type_tab(user_data, device_type, num_columns):
+    """Wyświetla zakładkę z typem Neuroliderera"""
+    zen_header("Twój typ neuroliderera")
     
-    # Get user degen type
-    degen_type = user_data.get('degen_type', None)
-    degen_scores = user_data.get('degen_scores', {})
+    # Pobierz dane dotyczące typu neuroliderera
+    neuroleader_type = user_data.get('neuroleader_type', None)
+    neuroleader_scores = user_data.get('neuroleader_scores', {})
     
-    if not degen_type or not degen_scores:
-        st.warning("Nie wykonałeś jeszcze testu typu degena.")
-        if zen_button("Wykonaj test", key="take_degen_test_btn"):
-            st.session_state.page = 'degen_test'
+    if not neuroleader_type or not neuroleader_scores:
+        st.warning("Nie wykonałeś jeszcze testu typu neuroliderera.")
+        if zen_button("Wykonaj test", key="take_neuroleader_test_btn"):
+            st.session_state.page = 'neuroleader_test'
             st.rerun()
     else:
-        # Results header
-        st.subheader(f"Twój dominujący typ: {degen_type}")
-        if degen_type in DEGEN_TYPES:
-            st.markdown(f"{DEGEN_TYPES[degen_type]['description']}")
+        # Nagłówek wyników
+        st.subheader(f"Twój dominujący typ: {neuroleader_type}")
+        if neuroleader_type in NEUROLEADER_TYPES:
+            st.markdown(f"{NEUROLEADER_TYPES[neuroleader_type].get('description', 'Brak opisu')}")
         
-        # Results chart
+        # Wykres wyników
         st.subheader("Twoje wyniki na wykresie")
-        fig = plot_radar_chart(degen_scores)
+        fig = plot_radar_chart(neuroleader_scores, device_type)
         st.pyplot(fig)
         
-        # Type details
+        # Szczegóły typu
         cols = st.columns(num_columns)
         
+        # Mocne strony
         with cols[0]:
             st.subheader("💪 Twoje mocne strony")
-            if degen_type in DEGEN_TYPES:
-                for strength in DEGEN_TYPES[degen_type]["strengths"]:
+            if neuroleader_type in NEUROLEADER_TYPES and "strengths" in NEUROLEADER_TYPES[neuroleader_type]:
+                for strength in NEUROLEADER_TYPES[neuroleader_type]["strengths"]:
                     st.markdown(f"✅ {strength}")
+            else:
+                st.info("Brak danych o mocnych stronach.")
         
+        # Wyzwania
         with cols[1 if num_columns > 1 else 0]:
             st.subheader("🚧 Twoje wyzwania")
-            if degen_type in DEGEN_TYPES:
-                for challenge in DEGEN_TYPES[degen_type]["challenges"]:
+            if neuroleader_type in NEUROLEADER_TYPES and "challenges" in NEUROLEADER_TYPES[neuroleader_type]:
+                for challenge in NEUROLEADER_TYPES[neuroleader_type]["challenges"]:
                     st.markdown(f"⚠️ {challenge}")
+            else:
+                st.info("Brak danych o wyzwaniach.")
         
-        # Strategy
+        # Strategia
         st.subheader("🎯 Zalecana strategia")
-        if degen_type in DEGEN_TYPES:
-            st.markdown(f"{DEGEN_TYPES[degen_type]['strategy']}")
+        if neuroleader_type in NEUROLEADER_TYPES and "strategy" in NEUROLEADER_TYPES[neuroleader_type]:
+            st.markdown(f"{NEUROLEADER_TYPES[neuroleader_type]['strategy']}")
+        else:
+            st.info("Brak zalecanej strategii.")
         
-        # Detailed description
-        if degen_type in degen_details:
+        # Szczegółowy opis
+        if neuroleader_type in NEUROLEADER_TYPES and "detailed_description" in NEUROLEADER_TYPES[neuroleader_type]:
             st.subheader("📑 Szczegółowy opis typu")
-            st.markdown(degen_details[degen_type])
+            st.markdown(NEUROLEADER_TYPES[neuroleader_type]["detailed_description"])
         
-        # Retake test button
-        if zen_button("Wykonaj test ponownie", key="retake_degen_test_btn"):
-            st.session_state.page = 'degen_test'
+        # Przycisk do ponownego wykonania testu
+        if zen_button("Wykonaj test ponownie", key="retake_neuroleader_test_btn"):
+            st.session_state.page = 'neuroleader_test'
             if 'test_step' in st.session_state:
                 del st.session_state['test_step']
             if 'test_scores' in st.session_state:
                 del st.session_state['test_scores']
-            st.session_state['show_test_info'] = True
             st.rerun()
+
+
